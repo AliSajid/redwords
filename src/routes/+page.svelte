@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  import wordlist from '$lib/data/words';
+  import type RedWord from '$lib/data/words';
+  import Card from '$lib/components/Card.svelte';
+
+  let word = wordlist[0];
+</script>
+
+<Card word={word.word} level={word.level} />
