@@ -1,0 +1,81 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0 # Use the ref you want to point at
+    hooks:
+      - id: trailing-whitespace
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-byte-order-marker
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: detect-aws-credentials
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: 'v8.45.0' # Use the sha / tag you want to point at
+    hooks:
+      - id: eslint
+        additional_dependencies:
+          - 'eslint@v8.49.0'
+          - '@typescript-eslint/eslint-plugin@5.62.0'
+          - 'eslint-plugin-svelte@2.33.1'
+          - 'prettier@3.0.0'
+        files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
+        types: [file]
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: 'v3.0.0' # Use the sha / tag you want to point at
+    hooks:
+      - id: prettier
+        additional_dependencies:
+          - prettier@3.0.0
+          - prettier-plugin-svelte@3.0.3
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.1
+    hooks:
+      - id: forbid-crlf
+      - id: remove-crlf
+      - id: forbid-tabs
+      - id: remove-tabs
+        args: [--whitespaces-count, '2']
+      - id: chmod
+        args: ['644']
+        files: \.md$
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
+    hooks:
+      - id: codespell
+        exclude: pnpm-lock.yaml
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args:
+          - --baseline
+          - .secrets.baseline
+        exclude: pnpm-lock.yaml
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: 3.5.3
+    hooks:
+      - id: commitizen
+  - repo: https://github.com/sirosen/texthooks
+    rev: 0.5.0
+    hooks:
+      - id: fix-smartquotes
+      - id: fix-ligatures
+      - id: fix-spaces
+      - id: forbid-bidi-controls
+  - repo: https://github.com/zricethezav/gitleaks
+    rev: v8.17.0
+    hooks:
+      - id: gitleaks
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+      - id: markdownlint
+        args:
+          - --ignore
+          - CHANGELOG.md
