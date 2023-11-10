@@ -1,7 +1,4 @@
-interface RedWord {
-  word: string;
-  level: string;
-}
+import type RedWord from '$lib/types/RedWord';
 
 const wordlist: RedWord[] = [
   {
@@ -127,6 +124,22 @@ const wordlist: RedWord[] = [
   {
     'word': 'does',
     'level': 'first_grade',
+  },
+  {
+    'word': 'some',
+    'level': 'first_grade',
+  },
+  {
+    'word': 'good',
+    'level': 'first_grade',
+  },
+  {
+    'word': 'get',
+    'level': 'kindergarten',
+  },
+  {
+    'word': 'no',
+    'level': 'kindergarten',
   },
 ];
 
