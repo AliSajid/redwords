@@ -14,10 +14,7 @@ const config = {
     alias: {
       $components: './src/components',
       $utils: './src/utils',
-      $stores: './src/stores',
-      $styles: './src/styles',
       $assets: './src/assets',
-      $pages: './src/pages',
       $static: './static',
     },
   },
