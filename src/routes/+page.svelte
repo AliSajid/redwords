@@ -1,9 +1,41 @@
 <script lang="ts">
   import wordlist from '$lib/data/words';
-  import type RedWord from '$lib/types/RedWord';
-  import CardWindow from '$lib/components/CardWindow.svelte';
+  import Card from '$lib/components/Card.svelte';
 
-  let redword: RedWord = wordlist[0];
+  let index = 0;
+
+  $: redword = wordlist[index % wordlist.length];
+
+  function next() {
+    index = ++index;
+    console.log(index);
+  }
+
+  function previous() {
+    if (index > 0) {
+      index = --index;
+    }
+    console.log(index);
+  }
 </script>
 
-<CardWindow {redword} />
+<div id="cardwindow">
+  <button type="button" on:click|preventDefault={previous}>Previous</button>
+  <Card {redword}></Card>
+  <button type="button" on:click|preventDefault={next}>Next</button>
+</div>
+
+<style>
+  #cardwindow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+  }
+  button {
+    width: 30%;
+    height: 100%;
+  }
+</style>

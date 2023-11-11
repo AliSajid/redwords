@@ -8,13 +8,13 @@
   <div class="redword">
     {redword.word}
   </div>
-  <footer>Level: {redword.level}</footer>
+  <footer>Level: {redword.level.replaceAll('_', ' ').toUpperCase()}</footer>
 </article>
 
 <style>
   article {
-    width: auto;
-    height: auto;
+    width: 60%;
+    height: 100%;
   }
   header {
     display: flex;
