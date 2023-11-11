@@ -1,9 +1,9 @@
 <script lang="ts">
   import wordlist from '$lib/data/words';
-  import type RedWord from '$lib/data/words';
-  import Card from '$lib/components/Card.svelte';
+  import type RedWord from '$lib/types/RedWord';
+  import CardWindow from '$lib/components/CardWindow.svelte';
 
-  let word = wordlist[0];
+  let redword: RedWord = wordlist[0];
 </script>
 
-<Card word={word.word} level={word.level} />
+<CardWindow {redword} />
