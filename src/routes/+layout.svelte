@@ -4,5 +4,7 @@
 </script>
 
 <Header />
-<slot />
+<div class="container">
+  <slot />
+</div>
 <Footer />
