@@ -1,27 +1,39 @@
 <script lang="ts">
-  export let word: string;
-  export let level: string;
+  import type RedWord from '$lib/types/RedWord';
+  export let redword: RedWord;
 </script>
 
 <article>
   <header>Word to read</header>
-  {word}
-  <footer>Level: {level}</footer>
+  <div class="redword">
+    {redword.word}
+  </div>
+  <footer>Level: {redword.level}</footer>
 </article>
 
 <style>
   article {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 1rem;
-    margin: 1rem 0;
+    width: auto;
+    height: auto;
   }
-
   header {
+    display: flex;
+    font-size: 1.5rem;
     font-weight: bold;
+    justify-content: center;
+  }
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
+    text-align: left;
   }
 
-  footer {
-    font-style: italic;
+  .redword {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
   }
 </style>
