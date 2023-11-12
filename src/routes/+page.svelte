@@ -8,14 +8,12 @@
 
   function next() {
     index = ++index;
-    console.log(index);
   }
 
   function previous() {
     if (index > 0) {
       index = --index;
     }
-    console.log(index);
   }
 </script>
 
