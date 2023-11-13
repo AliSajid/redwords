@@ -4,7 +4,7 @@
 </script>
 
 <Header />
-<div class="container-fluid" id="content">
+<div id="content">
   <slot />
 </div>
 <Footer />
