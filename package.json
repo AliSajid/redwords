@@ -67,9 +67,7 @@
       [
         "@semantic-release/git",
         {
-          "assets": [
-            "package.json"
-          ]
+          "assets": ["package.json"]
         }
       ],
       "@semantic-release/github"
