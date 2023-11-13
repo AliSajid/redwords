@@ -14,4 +14,8 @@
     padding: 1rem;
     text-align: center;
   }
+
+  nav > ul {
+    color: #fff;
+  }
 </style>
