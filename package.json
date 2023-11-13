@@ -1,6 +1,6 @@
 {
   "name": "redwords",
-  "version": "1.0.0-next.1",
+  "version": "1.0.0-next.2",
   "packageManager": "pnpm@8.10.2",
   "private": true,
   "scripts": {
@@ -67,7 +67,9 @@
       [
         "@semantic-release/git",
         {
-          "assets": ["package.json"]
+          "assets": [
+            "package.json"
+          ]
         }
       ],
       "@semantic-release/github"
