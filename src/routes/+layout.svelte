@@ -4,7 +4,14 @@
 </script>
 
 <Header />
-<div class="container">
+<div class="container-fluid" id="content">
   <slot />
 </div>
 <Footer />
+
+<style>
+  #content {
+    flex-grow: 1;
+    width: 100%;
+  }
+</style>
