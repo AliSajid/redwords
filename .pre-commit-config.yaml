@@ -24,6 +24,7 @@ repos:
           - '@typescript-eslint/eslint-plugin@5.62.0'
           - 'eslint-plugin-svelte@2.33.1'
           - 'prettier@3.0.0'
+          - 'prettier-plugin-svelte@3.0.3'
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
         types: [file]
   - repo: https://github.com/pre-commit/mirrors-prettier
