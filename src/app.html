@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body {
-        width: 100vw;
+        display: flex;
+        flex-direction: column;
         height: 100vh;
-        overflow: hidden;
+        width: 100vw;
       }
     </style>
     %sveltekit.head%
   </head>
-  <body data-sveltekit-preload-data="hover" class="container-fluid">
+  <body data-sveltekit-preload-data="hover" class="container-fluid" style="padding: 0">
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>
