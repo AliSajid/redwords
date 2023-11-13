@@ -684,7 +684,7 @@ packages:
       conventional-commits-filter: 4.0.0
       conventional-commits-parser: 5.0.0
       debug: 4.3.4
-      import-from-esm: 1.2.0
+      import-from-esm: 1.2.1
       lodash-es: 4.17.21
       micromatch: 4.0.5
       semantic-release: 22.0.7(typescript@5.2.2)
@@ -782,7 +782,7 @@ packages:
       conventional-commits-parser: 5.0.0
       debug: 4.3.4
       get-stream: 7.0.1
-      import-from-esm: 1.2.0
+      import-from-esm: 1.2.1
       into-stream: 7.0.0
       lodash-es: 4.17.21
       read-pkg-up: 11.0.0
@@ -2924,8 +2924,8 @@ packages:
       resolve-from: 4.0.0
     dev: true
 
-  /import-from-esm@1.2.0:
-    resolution: {integrity: sha512-W5LA8SOGlPYCiC3dLNJUtA45+bREeQ+8gpIcjaCTVmV986C8lkYH7DQm8btpdv08/5btyDmZB0tUc7sWUQ95Hw==}
+  /import-from-esm@1.2.1:
+    resolution: {integrity: sha512-Nly5Ab75rWZmOwtMa0B0NQNnHGcHOQ2zkU/bVENwK2lbPq+kamPDqNKNJ0hF7w7lR/ETD5nGgJq0XbofsZpYCA==}
     engines: {node: '>=16.20'}
     dependencies:
       import-meta-resolve: 4.0.0
