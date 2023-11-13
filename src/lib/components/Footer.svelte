@@ -9,4 +9,10 @@
     text-align: center;
     width: 100%;
   }
+
+  @media (prefers-color-scheme: dark) {
+    footer {
+      color: #fff;
+    }
+  }
 </style>
