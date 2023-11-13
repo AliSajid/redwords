@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0 # Use the ref you want to point at
+    rev: v4.5.0 # Use the ref you want to point at
     hooks:
       - id: trailing-whitespace
       - id: check-added-large-files
@@ -16,7 +16,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v8.45.0' # Use the sha / tag you want to point at
+    rev: 'v8.53.0' # Use the sha / tag you want to point at
     hooks:
       - id: eslint
         additional_dependencies:
@@ -28,14 +28,14 @@ repos:
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
         types: [file]
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: 'v3.0.0' # Use the sha / tag you want to point at
+    rev: 'v3.1.0' # Use the sha / tag you want to point at
     hooks:
       - id: prettier
         additional_dependencies:
           - prettier@3.0.0
           - prettier-plugin-svelte@3.0.3
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.1
+    rev: v1.5.4
     hooks:
       - id: forbid-crlf
       - id: remove-crlf
@@ -46,7 +46,7 @@ repos:
         args: ['644']
         files: \.md$
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.2.6
     hooks:
       - id: codespell
         exclude: pnpm-lock.yaml
@@ -59,22 +59,22 @@ repos:
           - .secrets.baseline
         exclude: pnpm-lock.yaml
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: 3.5.3
+    rev: 3.12.0
     hooks:
       - id: commitizen
   - repo: https://github.com/sirosen/texthooks
-    rev: 0.5.0
+    rev: 0.6.2
     hooks:
       - id: fix-smartquotes
       - id: fix-ligatures
       - id: fix-spaces
       - id: forbid-bidi-controls
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.17.0
+    rev: v8.18.0
     hooks:
       - id: gitleaks
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.35.0
+    rev: v0.37.0
     hooks:
       - id: markdownlint
         args:
