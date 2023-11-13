@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import Card from '$lib/components/Card.svelte';
-  import type RedWord from '$lib/types/RedWord';
 
   export let data: PageData;
 
@@ -9,10 +8,16 @@
 
   $: redword = data.props.words[index];
 
+  /**
+   * Increments the index to the next word.
+   */
   function next() {
     index = (index + 1) % data.props.words.length;
   }
 
+  /**
+   * Decrements the index to the previous word.
+   */
   function prev() {
     index = (index - 1 + data.props.words.length) % data.props.words.length;
   }
