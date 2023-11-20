@@ -2950,8 +2950,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /index-to-position@0.1.0:
-    resolution: {integrity: sha512-I6PLk0E6Jk8t/W212xp9euPed30tIN9mYdslb0Vkd03hG9sd0pByboBdtIRL+Y/103JLp1alP3OuMgxfbIQyFw==}
+  /index-to-position@0.1.2:
+    resolution: {integrity: sha512-MWDKS3AS1bGCHLBA2VLImJz42f7bJh8wQsTGCzI3j519/CASStoDONUBVz2I/VID0MpiX3SGSnbOD2xUalbE5g==}
     engines: {node: '>=18'}
     dev: true
 
@@ -4005,7 +4005,7 @@ packages:
     engines: {node: '>=18'}
     dependencies:
       '@babel/code-frame': 7.22.13
-      index-to-position: 0.1.0
+      index-to-position: 0.1.2
       json-parse-even-better-errors: 3.0.0
       type-fest: 4.7.0
     dev: true
