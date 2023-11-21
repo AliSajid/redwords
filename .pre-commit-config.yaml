@@ -50,6 +50,10 @@ repos:
     hooks:
       - id: codespell
         exclude: pnpm-lock.yaml
+        args:
+          - '-I'
+          - '.codespellignore'
+
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0
     hooks:
