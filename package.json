@@ -2,6 +2,9 @@
   "name": "redwords",
   "version": "1.0.0-next.2",
   "packageManager": "pnpm@8.10.2",
+  "prisma": {
+    "seed": "node --no-warnings --loader ts-node/esm prisma/seed.ts"
+  },
   "private": true,
   "scripts": {
     "dev": "vite dev",
@@ -25,6 +28,7 @@
     "@semantic-release/release-notes-generator": "^12.1.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
+    "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.28.0",
@@ -42,7 +46,7 @@
     "svelte-check": "^3.4.3",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
-    "typescript": "^5.0.0",
+    "typescript": "^5.2.2",
     "unplugin-icons": "^0.17.3",
     "vite": "^4.4.2",
     "vitest": "^0.32.2"
@@ -76,6 +80,7 @@
     ]
   },
   "dependencies": {
+    "@prisma/client": "5.6.0",
     "@sveltejs/adapter-vercel": "^3.0.3",
     "@vercel/blob": "^0.15.0",
     "@vercel/postgres": "^0.5.1"

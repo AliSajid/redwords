@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+enum WordLevelEnum {
+  KG
+  GR1
+  GR2
+  GR3
+  HIGH
+}
+
+enum VoiceEnum {
+  Russell
+  Nicole
+  Emma
+  Brian
+  Raveena
+  Aditi
+  Matthew
+  Justin
+  Joanna
+  Ivy
+}
+
+model RedWord {
+  id           Int            @id @default(autoincrement())
+  word         String         @unique
+  level        WordLevel      @relation(fields: [levelId], references: [id])
+  levelId      Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  RedWordAudio RedWordAudio[]
+}
+
+model WordLevel {
+  id                 Int           @id @default(autoincrement())
+  level_name         WordLevelEnum @unique @default(KG)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  level_display_name String
+  RedWords           RedWord[]
+}
+
+model RedWordAudio {
+  id        Int       @id @default(autoincrement())
+  word      RedWord   @relation(fields: [wordId], references: [id])
+  wordId    Int
+  voice     VoiceEnum
+  audio_url String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
