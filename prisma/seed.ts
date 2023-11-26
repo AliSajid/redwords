@@ -1,9 +1,18 @@
+/**
+ * Seed the database with word levels and red words.
+ */
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * Main function to seed the database with word levels and red words.
+ */
 async function main() {
   try {
+    /**
+     * Upsert the word level 'KG' and create red words associated with it.
+     */
     await prisma.wordLevel.upsert({
       where: { level_name: 'KG' },
       update: {},
@@ -40,6 +49,10 @@ async function main() {
         },
       },
     });
+
+    /**
+     * Upsert the word level 'GR1' and create red words associated with it.
+     */
     await prisma.wordLevel.upsert({
       where: { level_name: 'GR1' },
       update: {},
