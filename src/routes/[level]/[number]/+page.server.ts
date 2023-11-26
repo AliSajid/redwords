@@ -1,21 +1,40 @@
 import type { PageServerLoad } from './$types';
-import wordlist from '$lib/data/words';
+import { PrismaClient } from '@prisma/client';
+import wordLevelMapping from '$lib/utils/WordLevelMapping';
 
 export const load: PageServerLoad = async ({ params }) => {
-  const words = wordlist.filter((word) => word.level === params.level);
+  const prisma = new PrismaClient();
 
+  const level: string = wordLevelMapping[params.level] as string;
+  console.log('level', level);
   const numWords = parseInt(params.number, 10);
+  console.log('numWords', numWords);
 
-  // get params.number words from the list with replacement
-  const selectedWords = [];
-  for (let i = 0; i < numWords; i++) {
-    const index = Math.floor(Math.random() * words.length);
-    selectedWords.push(words[index]);
-  }
+  const wordLevel = await prisma.wordLevel.findUnique({
+    where: { level_name: level },
+  });
+
+  const wordlist = await prisma.redWord
+    .findMany({
+      where: { levelId: wordLevel?.id },
+      select: { id: true, level: true, word: true },
+      take: numWords,
+    })
+    .then((words) => {
+      return Promise.all(
+        words.map(async (word) => {
+          return {
+            id: word.id,
+            level: word.level.level_display_name,
+            word: word.word,
+          };
+        }),
+      );
+    });
 
   return {
     props: {
-      words: selectedWords,
+      words: wordlist,
     },
   };
 };
