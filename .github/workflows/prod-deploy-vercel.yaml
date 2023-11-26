@@ -10,6 +10,8 @@ env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
   BRANCH: ${{ github.ref_name }}
+  POSRGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+  POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
 
 jobs:
   Build-and-Test:
@@ -43,9 +45,6 @@ jobs:
         run: pnpm install
       - name: Run production migration
         run: pnpm dlx prisma migrate deploy
-        env:
-          POSRGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
-          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
       - name: Ensure playwright has the latest browser binaries
         run: pnpx playwright install --with-deps
       - uses: actions/upload-artifact@v3
@@ -104,9 +103,6 @@ jobs:
         run: pnpm install
       - name: Run production migration
         run: pnpm dlx prisma migrate deploy
-        env:
-          POSRGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
-          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
       - name: Populate Preview Variables
         run: vercel pull --yes --environment=${{env.PROJECT_ENVIRONMENT}} --token=${{ env.VERCEL_TOKEN }}
       - name: Build Project
