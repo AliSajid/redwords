@@ -13,26 +13,18 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-enum WordLevelEnum {
-  KG
-  GR1
-  GR2
-  GR3
-  HIGH
-}
-
-enum VoiceEnum {
-  Russell
-  Nicole
-  Emma
-  Brian
-  Raveena
-  Aditi
-  Matthew
-  Justin
-  Joanna
-  Ivy
-}
+// enum VoiceEnum {
+//   Russell
+//   Nicole
+//   Emma
+//   Brian
+//   Raveena
+//   Aditi
+//   Matthew
+//   Justin
+//   Joanna
+//   Ivy
+// }
 
 model RedWord {
   id           Int            @id @default(autoincrement())
@@ -45,20 +37,20 @@ model RedWord {
 }
 
 model WordLevel {
-  id                 Int           @id @default(autoincrement())
-  level_name         WordLevelEnum @unique @default(KG)
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
+  id                 Int       @id @default(autoincrement())
+  level_name         String    @unique
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
   level_display_name String
   RedWords           RedWord[]
 }
 
 model RedWordAudio {
-  id        Int       @id @default(autoincrement())
-  word      RedWord   @relation(fields: [wordId], references: [id])
+  id        Int      @id @default(autoincrement())
+  word      RedWord  @relation(fields: [wordId], references: [id])
   wordId    Int
-  voice     VoiceEnum
+  voice     String
   audio_url String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
