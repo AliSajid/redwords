@@ -97,6 +97,8 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
+      - name: Generate prisma client
+        run: pnpm run prsima:generate
       - name: Run production migration
         run: pnpm run migrate:prod
       - name: Populate Preview Variables
