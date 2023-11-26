@@ -1,10 +1,8 @@
 import type { PageServerLoad } from './$types';
-import { PrismaClient } from '@prisma/client';
 import wordLevelMapping from '$lib/utils/WordLevelMapping';
+import prisma from '$lib/utils/PrismaClient';
 
 export const load: PageServerLoad = async ({ params }) => {
-  const prisma = new PrismaClient();
-
   const level: string = wordLevelMapping[params.level as keyof typeof wordLevelMapping] as string;
 
   const numWords = parseInt(params.number, 10);
