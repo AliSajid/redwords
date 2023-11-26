@@ -47,6 +47,7 @@ jobs:
         run: pnpm dlx prisma migrate deploy
         env:
           POSRGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
       - name: Ensure playwright has the latest browser binaries
         run: pnpx playwright install --with-deps && npx playwright install --with-deps
       - name: Ensure project is formatted and linted
@@ -60,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
           GH_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
         run: pnpm run release
-  Depoy-Preview:
+  Deploy-Preview:
     runs-on: ubuntu-latest
     needs: Build-and-Test
     if: needs.Build-and-Test.result == 'success'
@@ -97,6 +98,11 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
+      - name: Run production migration
+        run: pnpm dlx prisma migrate deploy
+        env:
+          POSRGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
       - name: Populate Preview Variables
         run: vercel pull --yes --environment=${{env.PROJECT_ENVIRONMENT}} --token=${{ env.VERCEL_TOKEN }}
       - name: Build Project
