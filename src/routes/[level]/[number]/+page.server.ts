@@ -5,10 +5,9 @@ import wordLevelMapping from '$lib/utils/WordLevelMapping';
 export const load: PageServerLoad = async ({ params }) => {
   const prisma = new PrismaClient();
 
-  const level: string = wordLevelMapping[params.level] as string;
-  console.log('level', level);
+  const level: string = wordLevelMapping[params.level as keyof typeof wordLevelMapping] as string;
+
   const numWords = parseInt(params.number, 10);
-  console.log('numWords', numWords);
 
   const wordLevel = await prisma.wordLevel.findUnique({
     where: { level_name: level },
