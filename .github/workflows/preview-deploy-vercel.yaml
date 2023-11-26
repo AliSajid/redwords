@@ -98,7 +98,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run production migration
-        run: pnpm dlx prisma migrate deploy
+        run: pnpm run migrate:prod
       - name: Populate Preview Variables
         run: vercel pull --yes --environment=${{env.PROJECT_ENVIRONMENT}} --token=${{ env.VERCEL_TOKEN }}
       - name: Build Project
