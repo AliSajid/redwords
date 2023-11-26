@@ -17,6 +17,9 @@ const config = {
       $utils: './src/utils',
       $assets: './src/assets',
       $static: './static',
+      '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+      '.prisma/client/index': './../secondModule/node_modules/.prisma/client/index.js',
+      '@prisma/client/runtime/library': './../secondModule/node_modules/@prisma/client/runtime/library.js',
     },
   },
 };
