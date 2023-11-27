@@ -29,8 +29,6 @@
   }
 </script>
 
-<h1>Welcome to Red Word Practice</h1>
-
 {#if !levelChosen}
   <h2>Choose a level</h2>
   {#each levels as level}

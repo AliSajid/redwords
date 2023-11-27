@@ -23,8 +23,6 @@
   }
 </script>
 
-<h1>Welcome to Red Word Practice</h1>
-
 <div id="CardWindow">
   <button on:click={prev}>Previous</button>
   <Card {redword} />
