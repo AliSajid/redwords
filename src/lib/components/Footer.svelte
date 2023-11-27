@@ -6,8 +6,8 @@
     color: #fff;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    text-align: center;
     width: 100%;
+    text-align: center;
   }
 
   @media (prefers-color-scheme: dark) {
