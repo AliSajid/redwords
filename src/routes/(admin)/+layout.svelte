@@ -28,16 +28,16 @@
   }
   aside {
     width: 20%;
-    height: 100%;
     background-color: #f0f0f0;
     color: #414141;
     padding: 1rem;
+    flex-grow: 1;
   }
 
   main {
     width: 80%;
-    height: 100%;
     padding: 1rem;
+    flex-grow: 1;
   }
 
   li {
