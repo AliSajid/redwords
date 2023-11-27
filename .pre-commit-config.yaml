@@ -84,3 +84,10 @@ repos:
         args:
           - --ignore
           - CHANGELOG.md
+  - repo: local
+    hooks:
+      - id: svelte-check
+        name: svelte-check
+        entry: pnpm run check
+        language: system
+        types: [file]
