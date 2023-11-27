@@ -1,6 +1,8 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  const wordNumOptions: number[] = [5, 10, 15, 20];
+  import wordLevelMapping from '$lib/utils/WordLevelMapping';
+
+  const wordNumOptions: number[] = [5, 10];
   const levels: string[] = ['kindergarten', 'first_grade'];
   let levelChosen: boolean;
   let questionNumChosen: boolean;
@@ -13,7 +15,8 @@
    */
   function handleLevel(event: Event) {
     levelChosen = true;
-    level = (event.target as HTMLButtonElement).innerText;
+    const level_text = (event.target as HTMLButtonElement).innerText;
+    level = wordLevelMapping[level_text as keyof typeof wordLevelMapping];
   }
 
   /**
