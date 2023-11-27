@@ -1,6 +1,6 @@
 {
   "name": "redwords",
-  "version": "1.0.0-next.3",
+  "version": "1.0.0-next.4",
   "packageManager": "pnpm@8.10.2",
   "prisma": {
     "seed": "node --no-warnings --loader ts-node/esm prisma/seed.ts"
@@ -75,7 +75,9 @@
       [
         "@semantic-release/git",
         {
-          "assets": ["package.json"]
+          "assets": [
+            "package.json"
+          ]
         }
       ],
       "@semantic-release/github"
