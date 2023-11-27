@@ -15,8 +15,8 @@
    */
   function handleLevel(event: Event) {
     levelChosen = true;
-    const level_text = (event.target as HTMLButtonElement).innerText;
-    level = wordLevelMapping[level_text as keyof typeof wordLevelMapping];
+    const levelText = (event.target as HTMLButtonElement).innerText;
+    level = wordLevelMapping[levelText as keyof typeof wordLevelMapping];
   }
 
   /**
