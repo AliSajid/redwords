@@ -3,6 +3,15 @@
 
   let level: string;
   let questionNum: number;
+  let loading = false;
+
+  /**
+   * Navigates to the next page.
+   */
+  function navigate() {
+    loading = true;
+    goto(`/${level}/${questionNum}`);
+  }
 </script>
 
 <div id="questionsMain">
@@ -23,7 +32,7 @@
       <option value="5">5</option>
       <option value="10">10</option>
     </select>
-    <button type="submit" on:click|preventDefault={() => goto(`/${level}/${questionNum}`)}>Start</button>
+    <button type="submit" on:click|preventDefault={navigate} disabled={loading} aria-busy={loading}>Start</button>
   </form>
 </div>
 
