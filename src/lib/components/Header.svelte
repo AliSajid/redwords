@@ -1,9 +1,6 @@
 <nav>
   <ul>
-    <li><strong>Red Words</strong></li>
-  </ul>
-  <ul>
-    <li>Ms. Sanchez</li>
+    <li><strong><a href="/">Red Words</a></strong></li>
   </ul>
 </nav>
 
@@ -13,6 +10,7 @@
     color: #fff;
     padding: 1rem;
     text-align: center;
+    align-content: center;
   }
 
   nav > ul {
