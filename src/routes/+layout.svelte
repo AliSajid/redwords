@@ -5,6 +5,7 @@
 
 <Header />
 <div id="main">
+  <h1>Welcome to Red Word Practice</h1>
   <slot />
 </div>
 <Footer />
@@ -12,5 +13,9 @@
 <style>
   #main {
     flex-grow: 1;
+  }
+
+  h1 {
+    text-align: center;
   }
 </style>
