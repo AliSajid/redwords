@@ -7,6 +7,7 @@ export default defineConfig({
     sveltekit(),
     // eslint-disable-next-line new-cap
     Icons({
+      scale: 1.5,
       compiler: 'svelte',
     }),
   ],
