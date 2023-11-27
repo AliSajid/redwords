@@ -1,11 +1,17 @@
 import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/kit/vite';
+import Icons from 'unplugin-icons/vite';
 
 const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
   preprocess: vitePreprocess(),
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line new-cap
+    Icons({
+      compiler: 'svelte',
+    }),
+  ],
 
   kit: {
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
