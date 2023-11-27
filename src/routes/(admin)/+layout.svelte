@@ -28,8 +28,6 @@
   }
   aside {
     width: 20%;
-    background-color: #f0f0f0;
-    color: #414141;
     padding: 1rem;
     flex-grow: 1;
   }
