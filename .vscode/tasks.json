@@ -30,6 +30,20 @@
       "runOptions": {
         "runOn": "folderOpen"
       }
+    },
+    {
+      "type": "npm",
+      "script": "prisma:studio",
+      "problemMatcher": [],
+      "label": "Prisma Studio",
+      "detail": "prisma studio",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
   ]
 }
