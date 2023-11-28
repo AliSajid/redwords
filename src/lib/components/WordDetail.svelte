@@ -1,9 +1,66 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
   import AdminButtonPanel from './AdminButtonPanel.svelte';
+  import IconGameIconsSpeaker from '~icons/game-icons/speaker';
+  import IconGameIconsSpeakerOff from '~icons/game-icons/speaker-off';
   export let row: PrismaRedWordResult;
 </script>
 
-<h1>{row.word}</h1>
+<article>
+  <header>Word Details</header>
+  <div id="wordDetail">
+    <div class="redword">
+      {row.word}
+    </div>
+    <div class="audio">
+      {#if row.audioAvailable}
+        <IconGameIconsSpeaker />
+      {:else}
+        <IconGameIconsSpeakerOff />
+      {/if}
+      <p>{row.audioAvailable}</p>
+    </div>
+  </div>
+  <footer>
+    <span id="levelIndicator">Level: {row.level}</span>
+    <div><AdminButtonPanel {row} /></div>
+  </footer>
+</article>
 
-<AdminButtonPanel {row} />
+<style>
+  header {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    justify-content: center;
+  }
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: italic;
+    text-align: left;
+  }
+
+  #wordDetail {
+    display: flex;
+  }
+
+  .redword {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    width: 50%;
+  }
+
+  .audio {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    width: 50%;
+  }
+</style>
