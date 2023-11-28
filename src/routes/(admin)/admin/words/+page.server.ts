@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from '../current/$types';
 import type { Prisma } from '@prisma/client';
 import prisma from '$lib/utils/PrismaClient';
 import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ url }) => {
         level: { select: { levelName: true, levelDisplayName: true } },
         _count: { select: { redWordAudio: true } },
       },
-      orderBy: { updatedAt: 'asc' },
+      orderBy: { id: 'asc' },
       skip: parseInt(offset),
       take: parseInt(limit),
     })

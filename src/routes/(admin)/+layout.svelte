@@ -10,7 +10,7 @@
     <nav>
       <ul>
         <li><a href="/admin">Home</a></li>
-        <li><a href="/admin/current">Current Words</a></li>
+        <li><a href="/admin/words">Current Words</a></li>
         <li><a href="/admin/add_new">Add Words</a></li>
       </ul>
     </nav>
