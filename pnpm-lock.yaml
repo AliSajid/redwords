@@ -17,6 +17,9 @@ dependencies:
   '@vercel/postgres':
     specifier: ^0.5.1
     version: 0.5.1
+  svelte-table:
+    specifier: ^0.6.1
+    version: 0.6.1
 
 devDependencies:
   '@iconify/json':
@@ -5035,6 +5038,10 @@ packages:
       svelte: 4.2.2
       typescript: 5.2.2
     dev: true
+
+  /svelte-table@0.6.1:
+    resolution: {integrity: sha512-DfSwLs19mtp9V4rFo4oYv8T0YWFOR0Yy+43qtj3fPbZhd1h3vyycJ5c6mFlxICnsNYOD7WOjmQ/EpXY85mmJMQ==}
+    dev: false
 
   /svelte@4.2.2:
     resolution: {integrity: sha512-My2tytF2e2NnHSpn2M7/3VdXT4JdTglYVUuSuK/mXL2XtulPYbeBfl8Dm1QiaKRn0zoULRnL+EtfZHHP0k4H3A==}
