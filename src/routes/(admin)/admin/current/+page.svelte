@@ -1,12 +1,48 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import IconCheckOutline from '~icons/mdi/check-outline';
-  import IconCrossMark from '~icons/openmoji/cross-mark';
+  import SvelteTable from 'svelte-table';
+  import AvailabilityIcon from '$lib/components/AvailabilityIcon.svelte';
+  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
+  import Pagination from '$lib/components/Pagination.svelte';
+  import { page } from '$app/stores';
+  import WordDetail from '$lib/components/WordDetail.svelte';
+
+  let itemsPerPage = 10;
 
   export let data: PageData;
+
+  $: rows = data.words;
+
+  const columns = [
+    { key: 'id', title: 'ID', value: (row: PrismaRedWordResult) => row.id },
+    { key: 'word', title: 'Word', value: (row: PrismaRedWordResult) => row.word },
+    { key: 'levelDisplayName', title: 'Level', value: (row: PrismaRedWordResult) => row.levelDisplayName },
+    {
+      key: 'audioAvailable',
+      title: 'Audio Available',
+      renderComponent: AvailabilityIcon,
+    },
+  ];
 </script>
 
-<table role="grid">
+<SvelteTable {rows} {columns} showExpandIcon={true} expandSingle={true} rowKey="id">
+  <svelte:fragment slot="expanded" let:row><WordDetail {row} /></svelte:fragment>
+</SvelteTable>
+<Pagination {itemsPerPage} itemCount={data.wordCount} level={$page.url.searchParams.get('level')} />
+
+<!-- <nav>
+  <ul></ul>
+  <ul>
+    <li>
+      <a href="?level=KG" role="button">Kindergarten</a>
+    </li>
+    <li><a href="?level=GR1" role="button">First Grade</a></li>
+    <li><a href="?" role="button">Clear Grade Filter</a></li>
+  </ul>
+  <ul></ul>
+</nav>
+ -->
+<!-- <table role="grid">
   <thead>
     <tr>
       <th scope="col">Word</th>
@@ -21,7 +57,7 @@
         <td>{word.word}</td>
         <td>{word.levelDisplayName}</td>
         <td
-          >{#if word.audio_available}
+          >{#if word.audioAvailable}
             <IconCheckOutline style="font-size: 3em; color: green" />
           {:else}
             <IconCrossMark style="font-size: 4em" />
@@ -37,19 +73,4 @@
     {/each}
   </tbody>
 </table>
-
-<style>
-  button {
-    margin: 0.5rem;
-    width: 40%;
-  }
-
-  #buttons {
-    display: flex;
-  }
-
-  #delete {
-    background-color: maroon;
-    border-color: maroon;
-  }
-</style>
+<Pagination {itemsPerPage} itemCount={data.wordCount} level={$page.url.searchParams.get('level')} /> -->
