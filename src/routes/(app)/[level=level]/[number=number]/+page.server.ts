@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ params }) => {
   const numWords = parseInt(params.number, 10);
 
   const wordLevel = await prisma.wordLevel.findUnique({
-    where: { level_name: level },
+    where: { levelName: level },
   });
 
   const wordlist = await prisma.redWord
@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ params }) => {
         words.map(async (word) => {
           return {
             id: word.id,
-            level: word.level.level_display_name,
+            level: word.level.levelDisplayName,
             word: word.word,
           };
         }),
