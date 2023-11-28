@@ -1,13 +1,20 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-  import IconCheckOutline from '~icons/mdi/check-outline';
-  import IconCrossMark from '~icons/openmoji/cross-mark';
+  import CheckCross from '~icons/ri/add-circle-fill';
+  import CheckCircle from '~icons/ri/checkbox-circle-fill';
 
   export let row: PrismaRedWordResult;
 </script>
 
 {#if row.audioAvailable}
-  <IconCheckOutline style="font-size: 3em; color: green" />
+  <iconify-icon icon="ri:checkbox-circle-fill" style="color: green;" width="64"></iconify-icon>
 {:else}
-  <IconCrossMark style="font-size: 4em" />
+  <span><iconify-icon icon="ri:add-circle-fill" style="color: red;" width="64" rotate="45deg"></iconify-icon></span>
 {/if}
+
+<style>
+  span {
+    display: inline-block;
+    rotate: 45deg;
+  }
+</style>
