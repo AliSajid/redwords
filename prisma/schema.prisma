@@ -35,16 +35,16 @@ model RedWord {
   levelId      Int
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  RedWordAudio RedWordAudio[]
+  redWordAudio RedWordAudio[]
 }
 
 model WordLevel {
-  id                 Int       @id @default(autoincrement())
-  level_name         String    @unique
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  level_display_name String
-  RedWords           RedWord[]
+  id               Int       @id @default(autoincrement())
+  levelName        String    @unique
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  levelDisplayName String
+  redWords         RedWord[]
 }
 
 model RedWordAudio {
@@ -52,7 +52,7 @@ model RedWordAudio {
   word      RedWord  @relation(fields: [wordId], references: [id])
   wordId    Int
   voice     String
-  audio_url String?
+  audioUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

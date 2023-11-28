@@ -14,12 +14,12 @@ async function main() {
      * Upsert the word level 'KG' and create red words associated with it.
      */
     await prisma.wordLevel.upsert({
-      where: { level_name: 'KG' },
+      where: { levelName: 'KG' },
       update: {},
       create: {
-        level_name: 'KG',
-        level_display_name: 'Kindergarten',
-        RedWords: {
+        levelName: 'KG',
+        levelDisplayName: 'Kindergarten',
+        redWords: {
           create: [
             {
               word: 'the',
@@ -54,12 +54,12 @@ async function main() {
      * Upsert the word level 'GR1' and create red words associated with it.
      */
     await prisma.wordLevel.upsert({
-      where: { level_name: 'GR1' },
+      where: { levelName: 'GR1' },
       update: {},
       create: {
-        level_name: 'GR1',
-        level_display_name: 'First Grade',
-        RedWords: {
+        levelName: 'GR1',
+        levelDisplayName: 'First Grade',
+        redWords: {
           create: [
             {
               word: 'some',
