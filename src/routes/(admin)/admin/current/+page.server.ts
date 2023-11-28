@@ -1,17 +1,18 @@
 import type { PageServerLoad } from './$types';
-import prisma from '$lib/utils/PrismaClient';
 import type { Prisma } from '@prisma/client';
+import prisma from '$lib/utils/PrismaClient';
+import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
 
 type RedWordWhereInput = Prisma.RedWordWhereInput;
 
 export const load: PageServerLoad = async ({ url }) => {
-  const level: string | null = url.searchParams.get('level');
-  const limit: string = url.searchParams.get('limit') || '10';
+  const level: string | null = url.searchParams.get('level') || null;
+  const limit: string = '10';
   const offset: string = url.searchParams.get('offset') || '0';
 
   const filterCondition = level ? { level: { levelName: level } } : {};
 
-  const wordlist = await prisma.redWord
+  const wordlist: PrismaRedWordResult[] = await prisma.redWord
     .findMany({
       where: filterCondition as RedWordWhereInput,
       select: { id: true, word: true, level: { select: { levelName: true, levelDisplayName: true } } },
@@ -26,7 +27,7 @@ export const load: PageServerLoad = async ({ url }) => {
           word: word.word,
           level: word.level.levelName,
           levelDisplayName: word.level.levelDisplayName,
-          audio_available: false,
+          audioAvailable: false,
         };
       });
     });
