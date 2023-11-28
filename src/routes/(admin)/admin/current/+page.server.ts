@@ -15,7 +15,12 @@ export const load: PageServerLoad = async ({ url }) => {
   const wordlist: PrismaRedWordResult[] = await prisma.redWord
     .findMany({
       where: filterCondition as RedWordWhereInput,
-      select: { id: true, word: true, level: { select: { levelName: true, levelDisplayName: true } } },
+      select: {
+        id: true,
+        word: true,
+        level: { select: { levelName: true, levelDisplayName: true } },
+        _count: { select: { redWordAudio: true } },
+      },
       orderBy: { updatedAt: 'asc' },
       skip: parseInt(offset),
       take: parseInt(limit),
@@ -27,7 +32,8 @@ export const load: PageServerLoad = async ({ url }) => {
           word: word.word,
           level: word.level.levelName,
           levelDisplayName: word.level.levelDisplayName,
-          audioAvailable: false,
+          audioAvailable: word._count.redWordAudio !== 0,
+          audioCount: word._count.redWordAudio,
         };
       });
     });

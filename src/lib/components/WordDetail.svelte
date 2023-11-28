@@ -1,8 +1,8 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
   import AdminButtonPanel from './AdminButtonPanel.svelte';
-  import IconGameIconsSpeaker from '~icons/game-icons/speaker';
-  import IconGameIconsSpeakerOff from '~icons/game-icons/speaker-off';
+  import SpeakerOn from '~icons/game-icons/speaker';
+  import SpeakerOff from '~icons/game-icons/speaker-off';
   export let row: PrismaRedWordResult;
 </script>
 
@@ -14,11 +14,12 @@
     </div>
     <div class="audio">
       {#if row.audioAvailable}
-        <IconGameIconsSpeaker />
+        <SpeakerOn />
+        <p>{row.audioCount} / 10</p>
       {:else}
-        <IconGameIconsSpeakerOff />
+        <SpeakerOff />
+        <p>{row.audioCount} / 10</p>
       {/if}
-      <p>{row.audioAvailable}</p>
     </div>
   </div>
   <footer>
