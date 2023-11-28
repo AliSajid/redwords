@@ -17,13 +17,13 @@
     { key: 'id', title: 'ID', value: (row: PrismaRedWordResult) => row.id },
     { key: 'word', title: 'Word', value: (row: PrismaRedWordResult) => row.word },
     { key: 'levelDisplayName', title: 'Level', value: (row: PrismaRedWordResult) => row.levelDisplayName },
-    {
-      key: 'audioAvailable',
-      title: 'Audio Available',
-      renderComponent: AvailabilityIcon,
-    },
+    { key: 'audioAvailable', title: 'Audio Available', renderComponent: AvailabilityIcon },
   ];
 </script>
+
+<sveltekit:head>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</sveltekit:head>
 
 <SvelteTable {rows} {columns} showExpandIcon={true} expandSingle={true} rowKey="id">
   <svelte:fragment slot="expanded" let:row><WordDetail {row} /></svelte:fragment>

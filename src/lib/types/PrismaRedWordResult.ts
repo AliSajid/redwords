@@ -4,6 +4,7 @@ interface PrismaRedWordResult {
   level: string;
   levelDisplayName: string;
   audioAvailable: boolean;
+  audioCount: number;
 }
 
 export default PrismaRedWordResult;
