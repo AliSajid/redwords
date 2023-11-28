@@ -19,7 +19,7 @@
     {#each data.words as word}
       <tr>
         <td>{word.word}</td>
-        <td>{word.level_display_name}</td>
+        <td>{word.levelDisplayName}</td>
         <td
           >{#if word.audio_available}
             <IconCheckOutline style="font-size: 3em; color: green" />
