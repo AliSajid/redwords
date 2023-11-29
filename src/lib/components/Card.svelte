@@ -18,7 +18,11 @@
   <div class="redword">
     {redword.word}
   </div>
+<<<<<<< HEAD
   <div id="speaker" role="button" on:click={playAudio} tabindex="0" on:keypress={playAudio}><SpeakerOn /></div>
+=======
+  <div id="speaker"><SpeakerOn /></div>
+>>>>>>> e3aba23 (feat: add speaker Icon to the card)
   <footer>Level: {redword.level}</footer>
 </article>
 
@@ -51,7 +55,11 @@
   #speaker {
     display: flex;
     font-size: 3rem;
+<<<<<<< HEAD
     justify-content: center;
     width: 20%;
+=======
+    justify-content: end;
+>>>>>>> e3aba23 (feat: add speaker Icon to the card)
   }
 </style>
