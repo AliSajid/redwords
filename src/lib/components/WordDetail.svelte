@@ -14,10 +14,10 @@
     </div>
     <div class="audio">
       {#if row.audioAvailable}
-        <SpeakerOn />
+        <SpeakerOn style="color: green" />
         <p>{row.audioCount} / 10</p>
       {:else}
-        <SpeakerOff />
+        <SpeakerOff style="color: maroon" />
         <p>{row.audioCount} / 10</p>
       {/if}
     </div>
