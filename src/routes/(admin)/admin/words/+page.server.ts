@@ -1,4 +1,4 @@
-import type { PageServerLoad } from '../current/$types';
+import type { PageServerLoad } from './$types';
 import type { Prisma } from '@prisma/client';
 import prisma from '$lib/utils/PrismaClient';
 import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
