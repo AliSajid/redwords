@@ -4,14 +4,19 @@
 </script>
 
 <Header />
-<div id="content">
+<div id="main">
+  <h1>Welcome to Red Word Practice</h1>
   <slot />
 </div>
 <Footer />
 
 <style>
-  #content {
+  #main {
     flex-grow: 1;
-    width: 100%;
+  }
+
+  h1 {
+    margin-top: 1rem;
+    text-align: center;
   }
 </style>
