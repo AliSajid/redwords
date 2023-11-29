@@ -12,6 +12,10 @@
 </article>
 
 <style>
+  article {
+    width: 30%;
+    height: 50%;
+  }
   header {
     display: flex;
     font-size: 1.5rem;
