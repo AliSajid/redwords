@@ -9,10 +9,10 @@
 
 <form
   method="POST"
-  use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+  use:enhance={() => {
     creating = true;
 
-    return async ({ result, update }) => {
+    return async ({ update }) => {
       creating = false;
       await update();
     };
