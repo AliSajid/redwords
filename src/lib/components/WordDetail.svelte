@@ -1,6 +1,6 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-  import AdminButtonPanel from './AdminButtonPanel.svelte';
+  import DeleteWordButton from './DeleteWordButton.svelte';
   import SpeakerOn from '~icons/game-icons/speaker';
   import SpeakerOff from '~icons/game-icons/speaker-off';
   export let row: PrismaRedWordResult;
@@ -23,8 +23,8 @@
     </div>
   </div>
   <footer>
-    <span id="levelIndicator">Level: {row.level}</span>
-    <div><AdminButtonPanel {row} /></div>
+    <span id="levelIndicator">Level: {row.levelDisplayName}</span>
+    <div><DeleteWordButton {row} /></div>
   </footer>
 </article>
 
