@@ -89,6 +89,23 @@ async function main() {
         },
       },
     });
+
+    await prisma.wordLevel.createMany({
+      data: [
+        {
+          levelName: 'GR2',
+          levelDisplayName: 'Second Grade',
+        },
+        {
+          levelName: 'GR3',
+          levelDisplayName: 'Third Grade',
+        },
+        {
+          levelName: 'HIGH',
+          levelDisplayName: 'Higher Grades',
+        },
+      ],
+    });
   } catch (error) {
     console.error(error);
   } finally {
