@@ -1,17 +1,13 @@
 interface WordLevelMapping {
-  'Kindergarten': string;
-  'First Grade': string;
-  'Second Grade': string;
-  'Third Grade': string;
-  'Higher Grades': string;
+  [key: string]: string;
 }
 
 const wordLevelMapping: WordLevelMapping = {
-  'Kindergarten': 'KG',
-  'First Grade': 'GR1',
-  'Second Grade': 'GR2',
-  'Third Grade': 'GR3',
-  'Higher Grades': 'HIGH',
+  'KG': 'Kindergarten',
+  'GR1': 'First Grade',
+  'GR2': 'Second Grade',
+  'GR3': 'Third Grade',
+  'HIGH': 'Higher Grades',
 };
 
 export default wordLevelMapping;
