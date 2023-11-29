@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import SvelteTable from 'svelte-table';
-  import AvailabilityIcon from '$lib/components/AvailabilityIcon.svelte';
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
   import Pagination from '$lib/components/Pagination.svelte';
   import WordDetail from '$lib/components/WordDetail.svelte';
@@ -14,7 +13,6 @@
     { key: 'id', title: 'ID', value: (row: PrismaRedWordResult) => row.id },
     { key: 'word', title: 'Word', value: (row: PrismaRedWordResult) => row.word },
     { key: 'levelDisplayName', title: 'Level', value: (row: PrismaRedWordResult) => row.levelDisplayName },
-    { key: 'audioAvailable', title: 'Audio Available', renderComponent: AvailabilityIcon },
   ];
 </script>
 
