@@ -1,8 +1,5 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-  import CheckCross from '~icons/ri/add-circle-fill';
-  import CheckCircle from '~icons/ri/checkbox-circle-fill';
-
   export let row: PrismaRedWordResult;
 </script>
 
