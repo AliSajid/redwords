@@ -1,6 +1,10 @@
 {
   "name": "redwords",
+<<<<<<< HEAD
   "version": "2.0.0-next.5",
+=======
+  "version": "2.0.0-next.2",
+>>>>>>> ccacc69 (chore(release): 2.0.0-next.2 [skip ci])
   "packageManager": "pnpm@8.10.2",
   "prisma": {
     "seed": "node --no-warnings --loader ts-node/esm prisma/seed.ts"
@@ -84,7 +88,9 @@
       [
         "@semantic-release/git",
         {
-          "assets": ["package.json"]
+          "assets": [
+            "package.json"
+          ]
         }
       ],
       "@semantic-release/github"
