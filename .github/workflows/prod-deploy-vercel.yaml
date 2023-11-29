@@ -1,4 +1,4 @@
-name: Vercel Preview Deployments
+name: Vercel Production Deployments
 on:
   push:
     branches:
@@ -48,13 +48,7 @@ jobs:
       - name: Run production migration
         run: pnpm run migrate:prod
       - name: Ensure playwright has the latest browser binaries
-        run: pnpx playwright install --with-deps
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+        run: pnpx playwright install --with-deps && npx playwright install --with-deps
       - name: Ensure project is formatted and linted
         run: pnpm run lint
       - name: Ensure project syncs the configs
