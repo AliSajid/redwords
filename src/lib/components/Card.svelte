@@ -1,5 +1,7 @@
 <script lang="ts">
   import type RedWord from '$lib/types/RedWord';
+  import SpeakerOn from '~icons/game-icons/speaker';
+
   export let redword: RedWord;
 </script>
 
@@ -8,6 +10,7 @@
   <div class="redword">
     {redword.word}
   </div>
+  <div id="speaker"><SpeakerOn /></div>
   <footer>Level: {redword.level}</footer>
 </article>
 
@@ -35,5 +38,11 @@
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
+  }
+
+  #speaker {
+    display: flex;
+    font-size: 3rem;
+    justify-content: end;
   }
 </style>
