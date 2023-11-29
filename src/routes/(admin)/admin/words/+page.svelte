@@ -4,10 +4,7 @@
   import AvailabilityIcon from '$lib/components/AvailabilityIcon.svelte';
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
   import Pagination from '$lib/components/Pagination.svelte';
-  import { page } from '$app/stores';
   import WordDetail from '$lib/components/WordDetail.svelte';
-
-  let itemsPerPage = 10;
 
   export let data: PageData;
 
@@ -28,4 +25,4 @@
 <SvelteTable {rows} {columns} showExpandIcon={true} expandSingle={true} rowKey="id">
   <svelte:fragment slot="expanded" let:row><WordDetail {row} /></svelte:fragment>
 </SvelteTable>
-<Pagination {itemsPerPage} itemCount={data.wordCount} level={$page.url.searchParams.get('level')} />
+<Pagination itemCount={data.wordCount} />

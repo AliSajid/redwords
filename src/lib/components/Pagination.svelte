@@ -1,24 +1,17 @@
 <script lang="ts">
   export let itemCount: number;
-  export let itemsPerPage: number = 10;
-  export let level: string | null;
-  let levelEmpty = level === null || level === '';
 
+  const itemsPerPage: number = 10;
   const pageCount = Math.ceil(itemCount / itemsPerPage);
 </script>
 
 <ul>
+  <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars */ -->
   {#each Array(pageCount) as _, index (index)}
     <li>
-      {#if levelEmpty}
-        <a href="?level=&offset={index * itemsPerPage}">
-          {index + 1}
-        </a>
-      {:else}
-        <a href="?level={level}&offset={index * itemsPerPage}">
-          {index + 1}
-        </a>
-      {/if}
+      <a href="?&offset={index * itemsPerPage}">
+        {index + 1}
+      </a>
     </li>
   {/each}
 </ul>
