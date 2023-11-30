@@ -16,8 +16,8 @@
 
 <style>
   article {
-    width: 30%;
-    height: 50%;
+    width: 60%;
+    height: auto;
   }
   header {
     display: flex;
@@ -43,6 +43,6 @@
   #speaker {
     display: flex;
     font-size: 3rem;
-    justify-content: end;
+    justify-content: center;
   }
 </style>
