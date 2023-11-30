@@ -66,8 +66,9 @@ jobs:
           git_commit_gpgsign: true
           git_tag_gpgsign: true
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
           git_committer_email: ${{ vars.GIT_AUTHOR_EMAIL }}
-          trust_level: ultimate
+          fingerprint: ${{ vars.GPG_FINGERPRINT }}
       - name: Create a release
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
