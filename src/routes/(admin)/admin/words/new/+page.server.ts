@@ -13,6 +13,22 @@ export const actions: Actions = {
       const createQuery = prisma.redWord.create({
         data: {
           word: word,
+          redWordAudio: {
+            createMany: {
+              data: [
+                { voice: 'Russell' },
+                { voice: 'Nicole' },
+                { voice: 'Emma' },
+                { voice: 'Brian' },
+                { voice: 'Raveena' },
+                { voice: 'Aditi' },
+                { voice: 'Matthew' },
+                { voice: 'Justin' },
+                { voice: 'Joanna' },
+                { voice: 'Ivy' },
+              ],
+            },
+          },
           level: {
             connectOrCreate: {
               where: {
