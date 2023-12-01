@@ -19,7 +19,15 @@ export const load: PageServerLoad = async ({ url }) => {
         id: true,
         word: true,
         level: { select: { levelName: true, levelDisplayName: true } },
-        _count: { select: { redWordAudio: true } },
+        _count: {
+          select: {
+            redWordAudio: {
+              where: {
+                audioUrl: { not: null },
+              },
+            },
+          },
+        },
       },
       orderBy: { id: 'asc' },
       skip: parseInt(offset),
