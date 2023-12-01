@@ -23,27 +23,155 @@ async function main() {
           create: [
             {
               word: 'the',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'and',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'to',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'for',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'go',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'like',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'of',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'will',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
           ],
         },
@@ -63,27 +191,155 @@ async function main() {
           create: [
             {
               word: 'some',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'good',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'does',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'were',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'who',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'what',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'why',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
             {
               word: 'where',
+              redWordAudio: {
+                createMany: {
+                  data: [
+                    { voice: 'Russell' },
+                    { voice: 'Nicole' },
+                    { voice: 'Emma' },
+                    { voice: 'Brian' },
+                    { voice: 'Raveena' },
+                    { voice: 'Aditi' },
+                    { voice: 'Matthew' },
+                    { voice: 'Justin' },
+                    { voice: 'Joanna' },
+                    { voice: 'Ivy' },
+                  ],
+                },
+              },
             },
           ],
         },
