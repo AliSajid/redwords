@@ -5,7 +5,7 @@ import wordLevelMapping from '$lib/utils/WordLevelMapping';
 export const actions: Actions = {
   default: async (event) => {
     const formData = await event.request.formData();
-    const word = formData.get('word')?.toString() || null;
+    const word = formData.get('word')?.toString().toLowerCase() || null;
     const wordLevel = formData.get('wordLevel')?.toString() || '';
     const wordLevelDisplay = wordLevelMapping[wordLevel];
 
@@ -59,6 +59,16 @@ export const actions: Actions = {
             success: false,
           };
         });
+    } else {
+      return {
+        status: 400,
+        body: {
+          word: word,
+          wordLevel: wordLevel,
+          message: 'Word and level cannot be empty',
+        },
+        success: false,
+      };
     }
   },
 };
