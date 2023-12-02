@@ -86,6 +86,8 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-polly": "^3.465.0",
+    "@aws-sdk/credential-providers": "^3.465.0",
     "@prisma/client": "5.6.0",
     "@sveltejs/adapter-vercel": "^3.0.3",
     "@vercel/blob": "^0.15.0",
