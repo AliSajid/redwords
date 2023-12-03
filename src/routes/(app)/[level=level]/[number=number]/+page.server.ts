@@ -4,8 +4,7 @@ import prisma from '$lib/utils/PrismaClient';
 export const load: PageServerLoad = async ({ params }) => {
   /**
    * Generates a random integer between 0 and 9, inclusive.
-   *
-   * @returns {number} The generated random integer.
+   * @returns The generated random integer.
    */
   const getRandomNumber = () => Math.floor(Math.random() * 10);
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { invalidateAll } from '$app/navigation';
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
 
   export let row: PrismaRedWordResult;
