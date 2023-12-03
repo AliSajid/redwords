@@ -18,6 +18,7 @@
   <div class="redword">
     {redword.word}
   </div>
+  <div id="speaker" role="button" on:click={playAudio} tabindex="0" on:keypress={playAudio}><SpeakerOn /></div>
   <footer>Level: {redword.level}</footer>
 </article>
 
