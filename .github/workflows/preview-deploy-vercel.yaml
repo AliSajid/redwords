@@ -14,6 +14,8 @@ env:
   BRANCH: ${{ github.ref_name }}
   POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
   POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+  AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
+  AWS_REDWORD_ROLE_ARN: ${{ secrets.AWS_REDWORD_ROLE_ARN }}
 
 jobs:
   Build-and-Test:
