@@ -5,7 +5,7 @@ import { fromTemporaryCredentials } from '@aws-sdk/credential-providers';
 import {
   PollyClient,
   StartSpeechSynthesisTaskCommand,
-  VoiceId,
+  type VoiceId,
   type StartSpeechSynthesisTaskCommandInput,
   type PollyClientConfig,
 } from '@aws-sdk/client-polly';
