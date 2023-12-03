@@ -48,7 +48,7 @@ jobs:
       - name: Generate prisma client
         run: pnpm run prisma:generate
       - name: Run production migration
-        run: pnpm run migrate:prod
+        run: pnpm run migrate:prod:vercel
       - name: Ensure playwright has the latest browser binaries
         run: pnpx playwright install --with-deps && npx playwright install --with-deps
       - name: Ensure project is formatted and linted
