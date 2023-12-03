@@ -5,7 +5,7 @@ import wordLevelMapping from '$lib/utils/WordLevelMapping';
 export const actions: Actions = {
   default: async (event) => {
     const formData = await event.request.formData();
-    const word = formData.get('word')?.toString() || null;
+    const word = formData.get('word')?.toString().toLowerCase() || null;
     const wordLevel = formData.get('wordLevel')?.toString() || '';
     const wordLevelDisplay = wordLevelMapping[wordLevel];
 
@@ -13,6 +13,22 @@ export const actions: Actions = {
       const createQuery = prisma.redWord.create({
         data: {
           word: word,
+          redWordAudio: {
+            createMany: {
+              data: [
+                { voice: 'Russell' },
+                { voice: 'Nicole' },
+                { voice: 'Emma' },
+                { voice: 'Brian' },
+                { voice: 'Raveena' },
+                { voice: 'Aditi' },
+                { voice: 'Matthew' },
+                { voice: 'Justin' },
+                { voice: 'Joanna' },
+                { voice: 'Ivy' },
+              ],
+            },
+          },
           level: {
             connectOrCreate: {
               where: {
@@ -43,6 +59,16 @@ export const actions: Actions = {
             success: false,
           };
         });
+    } else {
+      return {
+        status: 400,
+        body: {
+          word: word,
+          wordLevel: wordLevel,
+          message: 'Word and level cannot be empty',
+        },
+        success: false,
+      };
     }
   },
 };

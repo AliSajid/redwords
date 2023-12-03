@@ -1,0 +1,20 @@
+name: Test GPG Subkey Import
+on:
+  workflow_dispatch:
+
+jobs:
+  test-gpg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup GPG Keys
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_tag_gpgsign: true
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
+          git_committer_email: ${{ vars.GIT_AUTHOR_EMAIL }}
+          #          fingerprint: ${{ vars.GPG_FINGERPRINT }}
+      - name: Output Keys
+        run: gpg --batch --with-colons --with-keygrip --list-secret-keys

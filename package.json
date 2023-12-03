@@ -1,6 +1,6 @@
 {
   "name": "redwords",
-  "version": "2.0.0",
+  "version": "2.0.0-next.5",
   "packageManager": "pnpm@8.10.2",
   "prisma": {
     "seed": "node --no-warnings --loader ts-node/esm prisma/seed.ts"
@@ -18,9 +18,14 @@
     "test:integration": "playwright test",
     "test:unit": "vitest",
     "release": "semantic-release",
-    "migrate:prod": "prisma migrate deploy",
+    "migrate:prod": "dotenv -e .vercel/.env.preview.local -- prisma migrate deploy",
+    "migrate:prod:vercel": "prisma migrate deploy",
+    "migrate:dev": "dotenv -e .vercel/.env.development.local -- prisma migrate deploy",
+    "reset:prod": "dotenv -e .vercel/.env.preview.local -- prisma migrate reset",
+    "reset:dev": "dotenv -e .vercel/.env.development.local -- prisma migrate reset",
     "prisma:generate": "prisma generate",
-    "prisma:studio": "prisma studio"
+    "prisma:studio:prod": "dotenv -e .vercel/.env.preview.local -- prisma studio",
+    "prisma:studio:dev": "dotenv -e .vercel/.env.development.local -- prisma studio"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.147",
@@ -46,12 +51,14 @@
     "prettier-plugin-svelte": "^3.0.0",
     "prisma": "^5.6.0",
     "semantic-release": "^22.0.7",
+    "supabase": "^1.115.4",
     "svelte": "^4.0.5",
     "svelte-check": "^3.4.3",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typescript": "^5.2.2",
     "unplugin-icons": "^0.17.3",
+    "vercel": "^32.6.1",
     "vite": "^4.4.2",
     "vitest": "^0.32.2"
   },
@@ -77,15 +84,15 @@
       [
         "@semantic-release/git",
         {
-          "assets": [
-            "package.json"
-          ]
+          "assets": ["package.json"]
         }
       ],
       "@semantic-release/github"
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-polly": "^3.465.0",
+    "@aws-sdk/credential-providers": "^3.465.0",
     "@prisma/client": "5.6.0",
     "@sveltejs/adapter-vercel": "^3.0.3",
     "@vercel/blob": "^0.15.0",

@@ -39,7 +39,6 @@
 
   #CardWindow > button {
     margin: 1rem;
-    width: 10%;
-    height: 100%;
+    width: auto;
   }
 </style>
