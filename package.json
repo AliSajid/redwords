@@ -19,6 +19,7 @@
     "test:unit": "vitest",
     "release": "semantic-release",
     "migrate:prod": "dotenv -e .vercel/.env.preview.local -- prisma migrate deploy",
+    "migrate:prod:vercel": "prisma migrate deploy",
     "migrate:dev": "dotenv -e .vercel/.env.development.local -- prisma migrate deploy",
     "reset:prod": "dotenv -e .vercel/.env.preview.local -- prisma migrate reset",
     "reset:dev": "dotenv -e .vercel/.env.development.local -- prisma migrate reset",
