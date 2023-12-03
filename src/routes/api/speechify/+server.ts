@@ -25,15 +25,18 @@ export const GET: RequestHandler = async ({ fetch }) => {
       });
     });
 
-  console.log(words);
-
   const urls = words.map((word) => {
     return `/api/speechify/${word.level}/${word.word}/${word.voice}`;
   });
 
-  const results = urls.map(async (url) => {
-    fetch(url);
-  });
+  const delayBetweenRequests = 100;
+
+  const results = [];
+  for (const url of urls) {
+    await new Promise((resolve) => setTimeout(resolve, delayBetweenRequests));
+    const res = await fetch(url);
+    results.push(res);
+  }
 
   const message = `Generating Audio for ${words.length} words`;
 

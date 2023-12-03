@@ -2,6 +2,13 @@ import type { PageServerLoad } from './$types';
 import prisma from '$lib/utils/PrismaClient';
 
 export const load: PageServerLoad = async ({ params }) => {
+  /**
+   * Generates a random integer between 0 and 9, inclusive.
+   *
+   * @returns {number} The generated random integer.
+   */
+  const getRandomNumber = () => Math.floor(Math.random() * 10);
+
   const level: string = params.level;
 
   const numWords = parseInt(params.number) || 5;
@@ -40,7 +47,7 @@ export const load: PageServerLoad = async ({ params }) => {
             id: word.id,
             level: word.level.levelDisplayName,
             word: word.word,
-            audioUrl: word.redWordAudio[0].audioUrl || '#',
+            audioUrl: word.redWordAudio[getRandomNumber()].audioUrl || '#',
           };
         }),
       );
