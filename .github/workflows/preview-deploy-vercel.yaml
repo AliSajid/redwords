@@ -116,7 +116,7 @@ jobs:
       - name: Generate prisma client
         run: pnpm run prisma:generate
       - name: Run production migration
-        run: pnpm run migrate:prod
+        run: pnpm run migrate:prod:vercel
       - name: Ensure project syncs the configs
         run: pnpm run check
       - name: Populate Preview Variables
