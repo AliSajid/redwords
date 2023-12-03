@@ -3,6 +3,14 @@
   import SpeakerOn from '~icons/game-icons/speaker';
 
   export let redword: RedWord;
+
+  $: audioUrl = redword.audioUrl;
+
+  const playAudio = () => {
+    const audio: HTMLAudioElement = new Audio(audioUrl);
+    console.log(audio);
+    audio.play();
+  };
 </script>
 
 <article>
@@ -10,7 +18,7 @@
   <div class="redword">
     {redword.word}
   </div>
-  <div id="speaker"><SpeakerOn /></div>
+  <div id="speaker" role="button" on:click={playAudio} tabindex="0" on:keypress={playAudio}><SpeakerOn /></div>
   <footer>Level: {redword.level}</footer>
 </article>
 
@@ -44,5 +52,6 @@
     display: flex;
     font-size: 3rem;
     justify-content: center;
+    width: 20%;
   }
 </style>

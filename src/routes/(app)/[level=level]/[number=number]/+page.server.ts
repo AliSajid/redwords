@@ -25,16 +25,12 @@ export const load: PageServerLoad = async ({ params }) => {
         .map(({ value }) => value);
     });
 
-  console.log(wordIds);
-
   const selectedWords = wordIds.slice(0, numWords);
-
-  console.log(selectedWords);
 
   const wordlist = await prisma.redWord
     .findMany({
       where: { levelId: wordLevel?.id, id: { in: selectedWords } },
-      select: { id: true, level: true, word: true },
+      select: { id: true, level: true, word: true, redWordAudio: true },
       take: numWords,
     })
     .then((words) => {
@@ -44,12 +40,11 @@ export const load: PageServerLoad = async ({ params }) => {
             id: word.id,
             level: word.level.levelDisplayName,
             word: word.word,
+            audioUrl: word.redWordAudio[0].audioUrl || '#',
           };
         }),
       );
     });
-
-  console.log(wordlist);
 
   return {
     props: {
