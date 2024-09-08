@@ -12,3 +12,5 @@ vite.config.ts.timestamp-*
 /.firebase
 .vercel
 test-results/
+*.db
+*.db-journal
