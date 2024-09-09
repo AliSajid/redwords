@@ -1,4 +1,4 @@
-interface PrismaRedWordResult {
+export default interface PrismaRedWordResult {
   id: number;
   word: string;
   level: string;
@@ -6,5 +6,3 @@ interface PrismaRedWordResult {
   audioAvailable: boolean;
   audioCount: number;
 }
-
-export default PrismaRedWordResult;
