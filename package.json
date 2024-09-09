@@ -47,7 +47,6 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
-    "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jsdoc": "^50.2.2",
     "eslint-plugin-svelte": "^2.43.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
@@ -102,6 +101,7 @@
     "@prisma/adapter-libsql": "^5.19.1",
     "@prisma/client": "^5.19.1",
     "@sveltejs/adapter-vercel": "^5.4.3",
+    "eslint-plugin-drizzle": "^0.2.3",
     "svelte-table": "^0.6.3"
   }
 }
