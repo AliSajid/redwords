@@ -14,8 +14,14 @@ export const load: PageServerLoad = async ({ params }) => {
 
   console.log(numWords);
 
+  if (process.env.VERCEL_ENV === 'development') {
+    console.info(`Database: ${process.env.TURSO_DB_URL}`);
+    console.info(`Database Token: ${process.env.TURSO_DB_TOKEN}`);
+  }
+
   const wordLevel = await prisma.wordLevel.findUnique({
     where: { levelName: level },
+    select: { id: true, levelDisplayName: true },
   });
 
   const wordIds = await prisma.redWord
