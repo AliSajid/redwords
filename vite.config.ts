@@ -5,7 +5,6 @@ import Icons from 'unplugin-icons/vite';
 export default defineConfig({
   plugins: [
     sveltekit(),
-    // eslint-disable-next-line new-cap
     Icons({
       scale: 1.5,
       compiler: 'svelte',
