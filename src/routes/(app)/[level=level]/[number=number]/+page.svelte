@@ -3,7 +3,6 @@
   import Card from '$lib/components/Card.svelte';
 
   export let data: PageData;
-
   let index = 0;
 
   $: redword = data.props.words[index];

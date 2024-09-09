@@ -2,31 +2,17 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
 
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url = "file:./redwords.dev.db"
 }
-
-// enum VoiceEnum {
-//   Russell
-//   Nicole
-//   Emma
-//   Brian
-//   Raveena
-//   Aditi
-//   Matthew
-//   Justin
-//   Joanna
-//   Ivy
-// }
 
 model RedWord {
   id           Int            @id @default(autoincrement())
@@ -48,13 +34,14 @@ model WordLevel {
 }
 
 model RedWordAudio {
-  id        Int      @id @default(autoincrement())
-  word      RedWord  @relation(fields: [wordId], references: [id], onDelete: Cascade)
-  wordId    Int
-  voice     String
-  audioUrl  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  word         RedWord  @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  wordId       Int
+  exampleField String?
+  voice        String
+  audioUrl     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@unique([wordId, voice])
 }
