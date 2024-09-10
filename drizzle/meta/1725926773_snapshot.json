@@ -1,0 +1,201 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "RedWord": {
+      "name": "RedWord",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "word": {
+          "autoincrement": false,
+          "name": "word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "levelId": {
+          "autoincrement": false,
+          "name": "levelId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "RedWord_word_key": {
+          "name": "RedWord_word_key",
+          "columns": ["word"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "RedWord_levelId_WordLevel_id_fk": {
+          "name": "RedWord_levelId_WordLevel_id_fk",
+          "tableFrom": "RedWord",
+          "tableTo": "WordLevel",
+          "columnsFrom": ["levelId"],
+          "columnsTo": ["id"],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "WordLevel": {
+      "name": "WordLevel",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "levelName": {
+          "autoincrement": false,
+          "name": "levelName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "levelDisplayName": {
+          "autoincrement": false,
+          "name": "levelDisplayName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "WordLevel_levelName_key": {
+          "name": "WordLevel_levelName_key",
+          "columns": ["levelName"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "RedWordAudio": {
+      "name": "RedWordAudio",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "wordId": {
+          "autoincrement": false,
+          "name": "wordId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "voice": {
+          "autoincrement": false,
+          "name": "voice",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "audioUrl": {
+          "autoincrement": false,
+          "name": "audioUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "exampleField": {
+          "autoincrement": false,
+          "name": "exampleField",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "RedWordAudio_wordId_voice_key": {
+          "name": "RedWordAudio_wordId_voice_key",
+          "columns": ["wordId", "voice"],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "RedWordAudio_wordId_RedWord_id_fk": {
+          "name": "RedWordAudio_wordId_RedWord_id_fk",
+          "tableFrom": "RedWordAudio",
+          "tableTo": "RedWord",
+          "columnsFrom": ["wordId"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
