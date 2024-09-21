@@ -8,6 +8,13 @@
       "when": 1725926773930,
       "tag": "1725926773_ambiguous_callisto",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1726252021832,
+      "tag": "1726252021_clever_meteorite",
+      "breakpoints": true
     }
   ]
 }

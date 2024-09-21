@@ -1,5 +1,7 @@
 import type { PageServerLoad } from './$types';
-import prisma from '$lib/utils/PrismaClient';
+import { db } from '$lib/utils/DrizzleClient';
+import { redWord, wordLevel } from '$lib/server/db/tables';
+import { eq, inArray } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ params }) => {
   /**
@@ -9,25 +11,26 @@ export const load: PageServerLoad = async ({ params }) => {
   const getRandomNumber = () => Math.floor(Math.random() * 10);
 
   const level: string = params.level;
-
   const numWords = parseInt(params.number) || 5;
-
-  console.log(numWords);
 
   if (process.env.VERCEL_ENV === 'development') {
     console.info(`Database: ${process.env.TURSO_DB_URL}`);
     console.info(`Database Token: ${process.env.TURSO_DB_TOKEN}`);
   }
 
-  const wordLevel = await prisma.wordLevel.findUnique({
-    where: { levelName: level },
-    select: { id: true, levelDisplayName: true },
-  });
+  const wordLevelInfo = (await db.query.wordLevel.findFirst({
+    columns: {
+      id: true,
+      levelName: true,
+      levelDisplayName: true,
+    },
+    where: eq(wordLevel.levelName, level),
+  })) || { id: 1, levelDisplayName: 'Kindergarten' };
 
-  const wordIds = await prisma.redWord
+  const wordIds = await db.query.redWord
     .findMany({
-      where: { level: { levelName: level } },
-      select: { id: true },
+      columns: { id: true },
+      where: eq(redWord.levelId, wordLevelInfo.id),
     })
     .then((words) => {
       return words
@@ -39,20 +42,31 @@ export const load: PageServerLoad = async ({ params }) => {
 
   const selectedWords = wordIds.slice(0, numWords);
 
-  const wordlist = await prisma.redWord
+  const wordList = await db.query.redWord
     .findMany({
-      where: { levelId: wordLevel?.id, id: { in: selectedWords } },
-      select: { id: true, level: true, word: true, redWordAudio: true },
-      take: numWords,
+      columns: {
+        id: true,
+        word: true,
+        levelId: true,
+      },
+      where: inArray(redWord.id, selectedWords),
+      with: {
+        redWordAudios: {
+          columns: {
+            audioUrl: true,
+          },
+        },
+        wordLevel: { columns: { levelDisplayName: true } },
+      },
     })
     .then((words) => {
       return Promise.all(
         words.map(async (word) => {
           return {
             id: word.id,
-            level: word.level.levelDisplayName,
             word: word.word,
-            audioUrl: word.redWordAudio[getRandomNumber()].audioUrl || '#',
+            level: word.wordLevel.levelDisplayName,
+            audioUrl: word.redWordAudios[getRandomNumber()].audioUrl || '#',
           };
         }),
       );
@@ -60,7 +74,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
   return {
     props: {
-      words: wordlist,
+      words: wordList,
+      message: '',
     },
   };
 };
