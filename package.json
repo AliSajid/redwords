@@ -2,9 +2,6 @@
   "name": "redwords",
   "version": "3.0.0-next.1",
   "packageManager": "pnpm@8.10.2",
-  "prisma": {
-    "seed": "node --no-warnings --loader ts-node/esm prisma/seed.ts"
-  },
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env.development vite dev",
@@ -18,14 +15,11 @@
     "test:integration": "playwright test",
     "test:unit": "vitest",
     "release": "semantic-release",
-    "introspect": "dotenv -e .env.development -- drizzle-kit introspect",
-    "migrate:prod": "dotenv -e .env.preview -- prisma migrate diff",
-    "migrate:dev": "dotenv -e .env.development -- prisma migrate deploy",
-    "reset:prod": "dotenv -e .env.preview -- prisma migrate reset",
-    "reset:dev": "dotenv -e .env.development -- prisma migrate reset",
-    "prisma:generate": "prisma generate",
-    "prisma:studio:prod": "dotenv -e .env.preview -- prisma studio",
-    "prisma:studio:dev": "dotenv -e .env.development -- prisma studio"
+    "db:introspect": "dotenv -e .env.development -- drizzle-kit introspect",
+    "db:generate": "dotenv -e .env.development -- drizzle-kit generate",
+    "db:push": "dotenv -e .env.development -- drizzle-kit push",
+    "db:migrate": "dotenv -e .env.development -- drizzle-kit migrate",
+    "db:studio": "dotenv -e .env.development -- drizzle-kit studio"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
