@@ -1,64 +1,133 @@
 import type { Actions } from './$types';
-import prisma from '$lib/utils/PrismaClient';
-import wordLevelMapping from '$lib/utils/WordLevelMapping';
+import { db } from '$lib/utils/DrizzleClient';
+import { redWord, redWordAudio, wordLevel } from '$lib/server/db/tables';
+import { eq, sql } from 'drizzle-orm';
 
 export const actions: Actions = {
   default: async (event) => {
     const formData = await event.request.formData();
     const word = formData.get('word')?.toString().toLowerCase() || null;
-    const wordLevel = formData.get('wordLevel')?.toString() || '';
-    const wordLevelDisplay = wordLevelMapping[wordLevel];
+    const wordLevelName = formData.get('wordLevel')?.toString() || null;
 
-    if (word !== null && wordLevel !== null) {
-      const createQuery = prisma.redWord.create({
-        data: {
-          word: word,
-          redWordAudio: {
-            createMany: {
-              data: [
-                { voice: 'Russell' },
-                { voice: 'Nicole' },
-                { voice: 'Emma' },
-                { voice: 'Brian' },
-                { voice: 'Raveena' },
-                { voice: 'Aditi' },
-                { voice: 'Matthew' },
-                { voice: 'Justin' },
-                { voice: 'Joanna' },
-                { voice: 'Ivy' },
-              ],
-            },
+    if (word !== null && wordLevelName !== null) {
+      const wordLevelId = await db.query.wordLevel
+        .findFirst({
+          columns: {
+            id: true,
           },
-          level: {
-            connectOrCreate: {
-              where: {
-                levelName: wordLevel,
-              },
-              create: {
-                levelName: wordLevel,
-                levelDisplayName: wordLevelDisplay,
-              },
-            },
+          where: eq(wordLevel.levelName, wordLevelName),
+        })
+        .then((result) => {
+          return result!.id;
+        });
+
+      const createQuery = db
+        .insert(redWord)
+        .values({
+          word: sql.placeholder('word'),
+          levelId: sql.placeholder('levelId'),
+          createdAt: sql`(CURRENT_TIMESTAMP)`,
+          updatedAt: sql`(CURRENT_TIMESTAMP)`,
+        })
+        .returning({ wordId: redWord.id })
+        .prepare();
+
+      const createAudioQuery = db
+        .insert(redWordAudio)
+        .values([
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Russell',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
           },
-        },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Nicole',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Emma',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Brian',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Raveena',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Aditi',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Matthew',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Justin',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Joanna',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+          {
+            wordId: sql.placeholder('wordId'),
+            voice: 'Ivy',
+            audioUrl: '',
+            createdAt: sql`(CURRENT_TIMESTAMP)`,
+            updatedAt: sql`(CURRENT_TIMESTAMP)`,
+          },
+        ])
+        .returning({ wordAudioId: redWordAudio.id })
+        .prepare();
+
+      const wordId = await createQuery.execute({
+        word: word,
+        levelId: wordLevelId,
       });
 
-      await prisma
-        .$transaction([createQuery])
-        .then(() => {
-          return { status: 200, body: { createQuery }, success: true };
-        })
-        .catch(() => {
-          return {
-            status: 400,
-            body: {
-              word: word,
-              wordLevel: wordLevel,
-              message: `Word ${word} for level ${wordLevelDisplay} already exists`,
-            },
-            success: false,
-          };
-        });
+      const audioInserts = await createAudioQuery.execute({
+        wordId: wordId,
+      });
+
+      return {
+        status: 200,
+        body: {
+          word: word,
+          wordLevel: wordLevelName,
+          message: 'Word added successfully',
+          wordAudio: audioInserts,
+        },
+        success: true,
+      };
     } else {
       return {
         status: 400,

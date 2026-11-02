@@ -1,54 +1,49 @@
 import type { PageServerLoad } from './$types';
-import type { Prisma } from '@prisma/client';
-import prisma from '$lib/utils/PrismaClient';
-import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-
-type RedWordWhereInput = Prisma.RedWordWhereInput;
+import { db } from '$lib/utils/DrizzleClient';
+import { redWord } from '$lib/server/db/tables';
+import { count } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ url }) => {
-  const level: string | null = url.searchParams.get('level') || null;
-  const limit: string = '10';
-  const offset: string = url.searchParams.get('offset') || '0';
+  const limit: number = parseInt('10');
+  const offset: number = parseInt(url.searchParams.get('offset') || '0');
 
-  const filterCondition = level ? { level: { levelName: level } } : {};
-
-  const wordlist: PrismaRedWordResult[] = await prisma.redWord
+  const wordList = await db.query.redWord
     .findMany({
-      where: filterCondition as RedWordWhereInput,
-      select: {
-        id: true,
-        word: true,
-        level: { select: { levelName: true, levelDisplayName: true } },
-        _count: {
-          select: {
-            redWordAudio: {
-              where: {
-                audioUrl: { not: null },
-              },
-            },
+      limit: limit,
+      offset: offset,
+      with: {
+        wordLevel: {
+          columns: {
+            levelName: true,
+            levelDisplayName: true,
+          },
+        },
+        redWordAudios: {
+          columns: {
+            voice: true,
+            audioUrl: true,
           },
         },
       },
-      orderBy: { id: 'asc' },
-      skip: parseInt(offset),
-      take: parseInt(limit),
     })
-    .then((words) => {
-      return words.map((word) => {
+    .then((result) => {
+      return result.map((word) => {
         return {
           id: word.id,
           word: word.word,
-          level: word.level.levelName,
-          levelDisplayName: word.level.levelDisplayName,
-          audioAvailable: word._count.redWordAudio !== 0,
-          audioCount: word._count.redWordAudio,
+          level: word.wordLevel.levelName,
+          levelDisplayName: word.wordLevel.levelDisplayName,
+          audioAvailable: word.redWordAudios.length > 0,
+          audioCount: word.redWordAudios.length,
         };
       });
     });
 
-  const wordCount = await prisma.redWord.count({
-    where: filterCondition as RedWordWhereInput,
-  });
-
-  return { words: wordlist, wordCount: wordCount };
+  const wordCount = await db
+    .select({ value: count() })
+    .from(redWord)
+    .then((result) => {
+      return result[0].value;
+    });
+  return { words: wordList, wordCount: wordCount };
 };
