@@ -13,6 +13,7 @@
    * @async
    */
   async function handleDelete() {
+    console.info(`Calling DELETE /admin/words/${row.level}/${row.word}`);
     await fetch(`/admin/words/${row.level}/${row.word}`, {
       method: 'DELETE',
     });
