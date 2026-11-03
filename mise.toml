@@ -1,4 +1,4 @@
 [tools]
-node = "24.22.0"
+node = "24.22.2"
 pre-commit = "4.7.0"
 "npm:dotenv-cli" = "11.1.0"
