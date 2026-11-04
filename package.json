@@ -1,7 +1,7 @@
 {
   "name": "redwords",
   "version": "3.0.0-next.1",
-  "packageManager": "pnpm@8.10.2",
+  "packageManager": "pnpm@12.16.1",
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env.development vite dev",
