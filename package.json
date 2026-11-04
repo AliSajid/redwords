@@ -39,7 +39,7 @@
     "@types/node": "^24.19.2",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.72.1",
-    "drizzle-kit": "^0.24.2",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^10.14.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^10.1.8",
@@ -54,10 +54,10 @@
     "semantic-release": "^25.0.9",
     "svelte": "^4.2.19",
     "svelte-check": "^4.0.2",
+    "tailwindcss": "^4.3.4",
     "ts-node": "^10.9.2",
     "tslib": "^2.7.0",
     "typescript": "^6.0.3",
-    "tailwindcss": "^4.3.4",
     "typescript-eslint": "^8.72.1",
     "unplugin-icons": "^0.19.3",
     "vercel": "^37.5.3",
@@ -86,7 +86,9 @@
       [
         "@semantic-release/git",
         {
-          "assets": ["package.json"]
+          "assets": [
+            "package.json"
+          ]
         }
       ],
       "@semantic-release/github"
@@ -95,11 +97,11 @@
   "dependencies": {
     "@aws-sdk/client-polly": "^3.654.0",
     "@aws-sdk/credential-providers": "^3.654.0",
-    "@libsql/client": "^0.8.1",
+    "@libsql/client": "^0.18.0",
     "@prisma/adapter-libsql": "^5.19.1",
     "@prisma/client": "^5.19.1",
     "@sveltejs/adapter-vercel": "^5.4.4",
-    "drizzle-orm": "^0.33.0",
+    "drizzle-orm": "^0.45.4",
     "eslint-plugin-drizzle": "^0.2.3",
     "svelte-table": "^0.6.3"
   }
