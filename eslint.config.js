@@ -39,6 +39,10 @@ export default [
         parser: ts.parser,
       },
     },
+    rules: {
+      // no-navigation-without-resolve is a Svelte 5 migration rule; deferred to Phase 4d
+      'svelte/no-navigation-without-resolve': 'off',
+    },
   },
   {
     ignores: ['build/', '.svelte-kit/', 'dist/', 'public/', '.vercel/'],
