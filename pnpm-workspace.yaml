@@ -5,7 +5,10 @@ allowBuilds:
   bufferutil: true
   esbuild: true
   prisma: true
+  workerd: true
 minimumReleaseAgeExclude:
   - eslint-plugin-jsdoc@65.4.3
   - eslint-plugin-svelte@3.24.0
   - svelte-eslint-parser@1.10.1
+  - miniflare@5.20261104.0-beta
+  - wrangler@4.158.0
