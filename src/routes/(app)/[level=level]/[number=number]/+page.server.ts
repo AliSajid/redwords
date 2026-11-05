@@ -2,6 +2,7 @@ import type { PageServerLoad } from './$types';
 import { db } from '$lib/utils/DrizzleClient';
 import { redWord, wordLevel } from '$lib/server/db/tables';
 import { eq, inArray } from 'drizzle-orm';
+import { env } from '$env/dynamic/private';
 
 export const load: PageServerLoad = async ({ params }) => {
   /**
@@ -13,9 +14,9 @@ export const load: PageServerLoad = async ({ params }) => {
   const level: string = params.level;
   const numWords = parseInt(params.number) || 5;
 
-  if (process.env.VERCEL_ENV === 'development') {
-    console.info(`Database: ${process.env.TURSO_DB_URL}`);
-    console.info(`Database Token: ${process.env.TURSO_DB_TOKEN}`);
+  if (env.VERCEL_ENV === 'development') {
+    console.info(`Database: ${env.TURSO_DB_URL}`);
+    console.info(`Database Token: ${env.TURSO_DB_TOKEN}`);
   }
 
   const wordLevelInfo = (await db.query.wordLevel.findFirst({
