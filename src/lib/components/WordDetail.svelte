@@ -4,7 +4,11 @@
   import SpeechifyWordButton from './SpeechifyWordButton.svelte';
   import SpeakerOn from '~icons/game-icons/speaker';
   import SpeakerOff from '~icons/game-icons/speaker-off';
-  export let row: PrismaRedWordResult;
+  interface Props {
+    row: PrismaRedWordResult;
+  }
+
+  let { row }: Props = $props();
 </script>
 
 <article>

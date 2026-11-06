@@ -1,8 +1,14 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { invalidateAll } from '$app/navigation';
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
 
-  export let row: PrismaRedWordResult;
+  interface Props {
+    row: PrismaRedWordResult;
+  }
+
+  let { row }: Props = $props();
 
   /**
    * Asynchronously handles the deletion of a word.
@@ -21,7 +27,7 @@
   }
 </script>
 
-<button on:click|preventDefault={handleDelete}>Delete</button>
+<button onclick={preventDefault(handleDelete)}>Delete</button>
 
 <style>
   button {

@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
 
-  let level: string;
-  let questionNum: number;
-  let loading = false;
+  let level: string = $state('');
+  let questionNum: number = $state(0);
+  let loading = $state(false);
 
   /**
    * Navigates to the next page.
@@ -32,7 +34,7 @@
       <option value="5">5</option>
       <option value="10">10</option>
     </select>
-    <button type="submit" on:click|preventDefault={navigate} disabled={loading} aria-busy={loading}>Start</button>
+    <button type="submit" onclick={preventDefault(navigate)} disabled={loading} aria-busy={loading}>Start</button>
   </form>
 </div>
 

@@ -1,8 +1,12 @@
 <script lang="ts">
-  export let itemCount: number;
+  interface Props {
+    itemCount: number;
+  }
+
+  let { itemCount }: Props = $props();
 
   const itemsPerPage: number = 10;
-  const pageCount = Math.ceil(itemCount / itemsPerPage);
+  const pageCount = $derived(Math.ceil(itemCount / itemsPerPage));
 </script>
 
 <ul>

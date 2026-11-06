@@ -2,10 +2,14 @@
   import type { PageData } from './$types';
   import Card from '$lib/components/Card.svelte';
 
-  export let data: PageData;
-  let index = 0;
+  interface Props {
+    data: PageData;
+  }
 
-  $: redword = data.props.words[index];
+  let { data }: Props = $props();
+  let index = $state(0);
+
+  let redword = $derived(data.props.words[index]);
 
   /**
    * Increments the index to the next word.
@@ -23,9 +27,9 @@
 </script>
 
 <div id="CardWindow">
-  <button on:click={prev}>Previous</button>
+  <button onclick={prev}>Previous</button>
   <Card {redword} />
-  <button on:click={next}>Next</button>
+  <button onclick={next}>Next</button>
 </div>
 
 <style>
