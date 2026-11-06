@@ -1,8 +1,8 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
 
-  let creating = false;
-  let value = '';
+  let creating = $state(false);
+  let value = $state('');
 </script>
 
 <h1>Add New Word</h1>

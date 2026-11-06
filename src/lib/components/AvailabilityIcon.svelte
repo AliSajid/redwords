@@ -1,6 +1,10 @@
 <script lang="ts">
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-  export let row: PrismaRedWordResult;
+  interface Props {
+    row: PrismaRedWordResult;
+  }
+
+  let { row }: Props = $props();
 </script>
 
 {#if row.audioAvailable}

@@ -2,9 +2,13 @@
   import type RedWord from '$lib/types/RedWord';
   import SpeakerOn from '~icons/game-icons/speaker';
 
-  export let redword: RedWord;
+  interface Props {
+    redword: RedWord;
+  }
 
-  $: audioUrl = redword.audioUrl;
+  let { redword }: Props = $props();
+
+  let audioUrl = $derived(redword.audioUrl);
 
   const playAudio = () => {
     const audio: HTMLAudioElement = new Audio(audioUrl);
@@ -18,7 +22,7 @@
   <div class="redword">
     {redword.word}
   </div>
-  <div id="speaker" role="button" on:click={playAudio} tabindex="0" on:keypress={playAudio}><SpeakerOn /></div>
+  <div id="speaker" role="button" onclick={playAudio} tabindex="0" onkeypress={playAudio}><SpeakerOn /></div>
   <footer>Level: {redword.level}</footer>
 </article>
 

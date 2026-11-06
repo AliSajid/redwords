@@ -5,9 +5,13 @@
   import Pagination from '$lib/components/Pagination.svelte';
   import WordDetail from '$lib/components/WordDetail.svelte';
 
-  export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
 
-  $: rows = data.words;
+  let { data }: Props = $props();
+
+  let rows = $derived(data.words);
 
   const columns = [
     { key: 'id', title: 'ID', value: (row: PrismaRedWordResult) => row.id },
@@ -21,6 +25,8 @@
 </sveltekit:head>
 
 <SvelteTable {rows} {columns} showExpandIcon={true} expandSingle={true} rowKey="id">
-  <svelte:fragment slot="expanded" let:row><WordDetail {row} /></svelte:fragment>
+  {#snippet expanded({ row })}
+    <WordDetail {row} />
+  {/snippet}
 </SvelteTable>
 <Pagination itemCount={data.wordCount} />

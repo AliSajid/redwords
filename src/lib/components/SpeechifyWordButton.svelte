@@ -1,7 +1,13 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
 
-  export let row: PrismaRedWordResult;
+  interface Props {
+    row: PrismaRedWordResult;
+  }
+
+  let { row }: Props = $props();
 
   /**
    * Asynchronously handles the audio generation of a word.
@@ -17,7 +23,7 @@
   }
 </script>
 
-<button on:click|preventDefault={handleSpeechify}>Speechify</button>
+<button onclick={preventDefault(handleSpeechify)}>Speechify</button>
 
 <style>
   button {
