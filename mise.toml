@@ -1,4 +1,8 @@
 [tools]
 node = "24.22.2"
-pre-commit = "4.7.0"
 "npm:dotenv-cli" = "11.1.0"
+yamllint = "1.38.0"
+markdownlint-cli2 = "0.24.0"
+gitleaks = "8.30.1"
+cspell = "10.4.1"
+typos = "1.52.2"
