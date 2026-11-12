@@ -2,7 +2,7 @@
   import { preventDefault } from 'svelte/legacy';
 
   import { invalidateAll } from '$app/navigation';
-  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
+  import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
 
   interface Props {
     row: PrismaRedWordResult;

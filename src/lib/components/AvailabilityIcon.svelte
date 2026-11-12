@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
+  import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
   interface Props {
     row: PrismaRedWordResult;
   }

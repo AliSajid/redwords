@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import Card from '$lib/components/Card.svelte';
+  import Card from '#lib/components/Card.svelte';
 
   interface Props {
     data: PageData;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
+  import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
   import DeleteWordButton from './DeleteWordButton.svelte';
   import SpeechifyWordButton from './SpeechifyWordButton.svelte';
   import SpeakerOn from '~icons/game-icons/speaker';

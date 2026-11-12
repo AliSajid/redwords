@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import voiceIds from '$lib/utils/VoiceIds';
+import voiceIds from '#lib/utils/VoiceIds.ts';
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
   const level = params.level;

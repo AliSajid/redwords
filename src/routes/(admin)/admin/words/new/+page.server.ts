@@ -1,6 +1,6 @@
 import type { Actions } from './$types';
-import { db } from '$lib/utils/DrizzleClient';
-import { redWord, redWordAudio, wordLevel } from '$lib/server/db/tables';
+import { db } from '#lib/utils/DrizzleClient.ts';
+import { redWord, redWordAudio, wordLevel } from '#lib/server/db/tables.ts';
 import { eq, sql } from 'drizzle-orm';
 
 export const actions: Actions = {

@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
-import { db } from '$lib/utils/DrizzleClient';
-import { redWord, wordLevel } from '$lib/server/db/tables';
+import { db } from '#lib/utils/DrizzleClient.ts';
+import { redWord, wordLevel } from '#lib/server/db/tables.ts';
 import { eq, inArray } from 'drizzle-orm';
 import { env } from '$env/dynamic/private';
 
