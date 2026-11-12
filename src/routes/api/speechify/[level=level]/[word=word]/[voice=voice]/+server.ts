@@ -9,7 +9,7 @@ import {
   type StartSpeechSynthesisTaskCommandInput,
   type PollyClientConfig,
 } from '@aws-sdk/client-polly';
-import { AWS_S3_BUCKET_NAME, AWS_REDWORD_ROLE_ARN } from '$env/static/private';
+import { AWS_S3_BUCKET_NAME, AWS_REDWORD_ROLE_ARN } from '$app/env/private';
 
 export const GET: RequestHandler = async ({ params }) => {
   const level = params.level;
