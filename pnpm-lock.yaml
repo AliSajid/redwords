@@ -181,9 +181,6 @@ importers:
       eslint-plugin-drizzle:
         specifier: ^0.2.3
         version: 0.2.3(eslint@10.14.0(jiti@2.7.0)(supports-color@7.2.0))
-      svelte-table:
-        specifier: ^0.6.3
-        version: 0.6.3
     devDependencies:
       '@cloudflare/workers-types':
         specifier: 5.20261104.1
@@ -3993,9 +3990,6 @@ packages:
     peerDependenciesMeta:
       svelte:
         optional: true
-
-  svelte-table@0.6.3:
-    resolution: {integrity: sha512-hRupgSslAiN4c+6xF2/amA5jlcrHG6qsmFNy0o9AEqSlaQTidEyKynQIJKnVVpyCxJESz4NTJ4/fxdHvQdIOtg==}
 
   svelte@5.57.3:
     resolution: {integrity: sha512-5mAftM3SoDV9X0zdF386F9p2pv8iKOwi/KfBS1XnBAkVCKFzVOLHUoa8iGWAt4buoicLmyWVRpuuD5wplXOQsg==}
@@ -8247,8 +8241,6 @@ snapshots:
       semver: 7.8.6
     optionalDependencies:
       svelte: 5.57.3(@typescript-eslint/types@8.72.1)
-
-  svelte-table@0.6.3: {}
 
   svelte@5.57.3(@typescript-eslint/types@8.72.1):
     dependencies:
