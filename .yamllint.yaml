@@ -8,4 +8,4 @@ rules:
   indentation:
     spaces: 2
     indent-sequences: consistent
-  truthy: "disable"
+  truthy: 'disable'
