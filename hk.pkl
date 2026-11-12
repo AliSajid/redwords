@@ -1,0 +1,109 @@
+amends "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Config.pkl"
+
+import "package://github.com/jdx/hk/releases/download/v1.58.1/hk@1.58.1#/Builtins.pkl"
+
+/// Fails (exit 1) and prints file:line for every line matching a Perl regex.
+local function perlForbid(flags: String, pattern: String, label: String): Step = new Step {
+  types = List("text")
+  check =
+    "perl \(flags) -ne 'if (/\(pattern)/) { print \"$ARGV:$.: \(label)\\n\"; $f = 1 } close ARGV if eof; END { $? = $f ? 1 : 0 }' {{files}}"
+}
+
+/// Same check, plus an in-place Perl substitution as the fixer.
+local function perlFix(flags: String, pattern: String, label: String, expr: String): Step = (
+  perlForbid(flags, pattern, label)
+) {
+  fix = "perl \(flags) -pi -e '\(expr)' {{files}}"
+}
+
+local lint_steps = new Mapping<String, Step> {
+  // File hygiene
+  ["trailing-whitespace"] = Builtins.trailing_whitespace
+  ["end-of-file-fixer"] = Builtins.newlines
+  ["fix-byte-order-marker"] = Builtins.byte_order_marker
+  ["mixed-line-ending"] = Builtins.mixed_line_ending // normalizes to LF
+  ["check-added-large-files"] = Builtins.check_added_large_files
+  ["check-case-conflict"] = Builtins.check_case_conflict
+  ["check-merge-conflict"] = Builtins.check_merge_conflict
+  ["check-symlinks"] = Builtins.check_symlinks
+  ["check-yaml"] = (Builtins.yamllint) {
+    exclude = List("pnpm-lock.yaml")
+  }
+  ["markdownlint"] = (Builtins.markdown_lint) {
+    exclude = List("**/CHANGELOG.md")
+  }
+
+  // Every tab becomes 4 spaces; anything left over fails the hook.
+  // Makefiles need real tabs, so they are the only exception.
+  ["no-tabs"] = (perlFix("", #"\t"#, "tab character", #"s/\t/    /g"#)) {
+    exclude = List("**/Makefile", "**/*.mk")
+  }
+
+  // Unicode cleanup (replaces the sirosen-texthooks steps)
+  ["fix-smartquotes"] = Builtins.fix_smart_quotes
+  ["fix-spaces"] =
+    perlFix(
+      "-CSD",
+      #"[\x{00A0}\x{1680}\x{2000}-\x{200A}\x{202F}\x{205F}\x{3000}]"#,
+      "unicode space",
+      #"s/[\x{00A0}\x{1680}\x{2000}-\x{200A}\x{202F}\x{205F}\x{3000}]/ /g"#,
+    )
+  ["fix-ligatures"] =
+    perlFix(
+      "-CSD",
+      #"[\x{FB00}-\x{FB06}]"#,
+      "ligature",
+      #"s/\x{FB00}/ff/g; s/\x{FB01}/fi/g; s/\x{FB02}/fl/g; s/\x{FB03}/ffi/g; s/\x{FB04}/ffl/g; s/\x{FB05}/st/g; s/\x{FB06}/st/g"#,
+    )
+  ["forbid-bidi-controls"] =
+    perlForbid(
+      "-CSD",
+      #"[\x{061C}\x{200E}\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]"#,
+      "bidi control character",
+    )
+
+  // Spelling (no hk builtin for codespell; same tool, same args as before)
+  ["typos"] = (Builtins.typos) {
+    types = List("text")
+    exclude = List("pnpm-lock.yaml")
+  }
+
+  // Secrets
+  ["detect-private-key"] = Builtins.detect_private_key
+  ["gitleaks"] = Builtins.gitleaks_staged
+
+  // Project
+  ["eslint"] {
+    glob = List("**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx")
+    check = "pnpm exec eslint {{files}}"
+  }
+  ["prettier"] {
+    check = "pnpm exec prettier --check --ignore-unknown --plugin prettier-plugin-svelte {{files}}"
+    fix = "pnpm exec prettier --write --ignore-unknown --plugin prettier-plugin-svelte {{files}}"
+  }
+  // Project-wide check: the script takes no file arguments.
+  ["svelte-check"] {
+    glob = List("**/*.svelte", "**/*.ts", "**/*.js")
+    check = "pnpm run check"
+  }
+}
+
+hooks {
+  ["pre-commit"] {
+    fix = true
+    stash = "git"
+    steps = lint_steps
+  }
+  ["commit-msg"] {
+    steps {
+      ["conventional-commit"] = Builtins.check_conventional_commit
+    }
+  }
+  ["check"] {
+    steps = lint_steps
+  }
+  ["fix"] {
+    fix = true
+    steps = lint_steps
+  }
+}
