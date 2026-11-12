@@ -1,5 +1,5 @@
-import type SpeechSynthesisTaskDBInput from '$lib/types/SpeechSynthesisTaskDBInput';
-import db from '$lib/utils/DrizzleClient';
+import type SpeechSynthesisTaskDBInput from '#lib/types/SpeechSynthesisTaskDBInput.ts';
+import db from '#lib/utils/DrizzleClient.ts';
 
 export const saveSpeechToDatabase = async (speechSynthesisTaskInput: SpeechSynthesisTaskDBInput) => {
   const { word, level, voice, speechSynthesisTask } = speechSynthesisTaskInput;

@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { saveSpeechToDatabase } from '$lib/utils/SpeechSynthesisTask';
+import { saveSpeechToDatabase } from '#lib/utils/SpeechSynthesisTask.ts';
 import { fromTemporaryCredentials } from '@aws-sdk/credential-providers';
 
 import {

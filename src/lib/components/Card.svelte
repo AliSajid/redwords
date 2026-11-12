@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type RedWord from '$lib/types/RedWord';
+  import type RedWord from '#lib/types/RedWord.ts';
   import SpeakerOn from '~icons/game-icons/speaker';
 
   interface Props {

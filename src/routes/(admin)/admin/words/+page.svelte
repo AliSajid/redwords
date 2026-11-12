@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
-  import Pagination from '$lib/components/Pagination.svelte';
-  import WordDetail from '$lib/components/WordDetail.svelte';
-  import SvelteTable from '$lib/components/SvelteTable.svelte';
+  import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
+  import Pagination from '#lib/components/Pagination.svelte';
+  import WordDetail from '#lib/components/WordDetail.svelte';
+  import SvelteTable from '#lib/components/SvelteTable.svelte';
 
   interface Props {
     data: PageData;

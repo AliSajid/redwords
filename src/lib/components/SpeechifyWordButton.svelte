@@ -1,7 +1,7 @@
 <script lang="ts">
   import { preventDefault } from 'svelte/legacy';
 
-  import type PrismaRedWordResult from '$lib/types/PrismaRedWordResult';
+  import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
 
   interface Props {
     row: PrismaRedWordResult;

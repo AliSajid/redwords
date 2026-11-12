@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
-import { db } from '$lib/utils/DrizzleClient';
-import { redWord } from '$lib/server/db/tables';
+import { db } from '#lib/utils/DrizzleClient.ts';
+import { redWord } from '#lib/server/db/tables.ts';
 import { count } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ url }) => {

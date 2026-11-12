@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { db } from '$lib/utils/DrizzleClient';
-import { redWord } from '$lib/server/db/tables';
+import { db } from '#lib/utils/DrizzleClient.ts';
+import { redWord } from '#lib/server/db/tables.ts';
 import { eq } from 'drizzle-orm';
 
 export const GET: RequestHandler = async () => {
