@@ -71,7 +71,6 @@
         "@aws-sdk/credential-providers": "^3.654.0",
         "@libsql/client": "^0.18.0",
         "drizzle-orm": "^0.45.4",
-        "eslint-plugin-drizzle": "^0.2.3",
-        "svelte-table": "^0.6.3"
+        "eslint-plugin-drizzle": "^0.2.3"
     }
 }
