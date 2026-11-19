@@ -12,7 +12,9 @@
    */
   function navigate() {
     loading = true;
-    goto(`/${level}/${questionNum}`);
+    goto(`/${level}/${questionNum}`).catch(() => {
+      loading = false;
+    });
   }
 </script>
 
