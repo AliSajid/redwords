@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm/relations';
-import { wordLevel, redWord, redWordAudio } from './tables';
+import { wordLevel, redWord, redWordAudio } from './schema';
 
 export const redWordRelations = relations(redWord, ({ one, many }) => ({
   wordLevel: one(wordLevel, {
@@ -19,3 +19,12 @@ export const redWordAudioRelations = relations(redWordAudio, ({ one }) => ({
     references: [redWord.id],
   }),
 }));
+
+export const schema = {
+  redWord,
+  wordLevel,
+  redWordAudio,
+  redWordRelations,
+  wordLevelRelations,
+  redWordAudioRelations,
+};
