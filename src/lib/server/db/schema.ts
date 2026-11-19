@@ -1,4 +1,4 @@
-import { sqliteTable, AnySQLiteColumn, uniqueIndex, foreignKey, integer, text, numeric } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, uniqueIndex, integer, text, numeric } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
 
 export const redWord = sqliteTable(
