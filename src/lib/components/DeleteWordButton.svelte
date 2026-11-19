@@ -1,7 +1,7 @@
 <script lang="ts">
   import { preventDefault } from 'svelte/legacy';
 
-  import { invalidateAll } from '$app/navigation';
+  import { refreshAll } from '$app/navigation';
   import type PrismaRedWordResult from '#lib/types/PrismaRedWordResult.ts';
 
   interface Props {
@@ -23,7 +23,7 @@
     await fetch(`/admin/words/${row.level}/${row.word}`, {
       method: 'DELETE',
     });
-    invalidateAll();
+    refreshAll();
   }
 </script>
 
