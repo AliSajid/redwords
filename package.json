@@ -75,6 +75,14 @@
   },
   "imports": {
     "#lib": "./src/lib/index.js",
-    "#lib/*": "./src/lib/*"
+    "#lib/*": "./src/lib/*",
+    "#components": "./src/components",
+    "#components/*": "./src/components/*",
+    "#utils": "./src/utils",
+    "#utils/*": "./src/utils/*",
+    "#assets": "./src/assets",
+    "#assets/*": "./src/assets/*",
+    "#static": "./static",
+    "#static/*": "./static/*"
   }
 }
