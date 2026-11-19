@@ -13,13 +13,7 @@ export const saveSpeechToDatabase = async (speechSynthesisTaskInput: SpeechSynth
       .from(redWord)
       .innerJoin(wordLevel, eq(redWord.levelId, wordLevel.id))
       .innerJoin(redWordAudio, eq(redWord.id, redWordAudio.wordId))
-      .where(
-        and(
-          eq(redWord.word, word),
-          eq(wordLevel.levelName, level),
-          eq(redWordAudio.voice, voice),
-        ),
-      );
+      .where(and(eq(redWord.word, word), eq(wordLevel.levelName, level), eq(redWordAudio.voice, voice)));
 
     if (!target) {
       throw new Error(`Could not find word: ${word} for level: ${level}`);
