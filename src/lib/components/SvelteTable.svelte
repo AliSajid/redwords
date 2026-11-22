@@ -1,10 +1,10 @@
-<script lang="ts">
+<script lang="ts" generics="T extends Record<string, unknown>">
   import type { Snippet } from 'svelte';
 
-  type Column = {
+  type Column<T> = {
     key: string;
     title: string;
-    value?: (row: any) => unknown;
+    value?: (row: T) => unknown;
   };
 
   let {
@@ -15,12 +15,12 @@
     expandSingle = false,
     expanded,
   }: {
-    rows: any[];
-    columns: Column[];
-    rowKey: string;
+    rows: T[];
+    columns: Column<T>[];
+    rowKey: keyof T & string;
     showExpandIcon?: boolean;
     expandSingle?: boolean;
-    expanded?: Snippet<[{ row: any }]>;
+    expanded?: Snippet<[{ row: T }]>;
   } = $props();
 
   let open = $state<unknown[]>([]);
@@ -52,7 +52,6 @@
   <tbody>
     {#each rows as row (row[rowKey])}
       {@const isOpen = open.includes(row[rowKey])}
-      <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
       <tr class:open={isOpen} class:expandable={!!expanded} onclick={() => toggle(row[rowKey])}>
         {#if hasIcon}
           <td class="icon">
