@@ -42,6 +42,9 @@ export default [
     rules: {
       // no-navigation-without-resolve is a Svelte 5 migration rule; deferred to Phase 4d
       'svelte/no-navigation-without-resolve': 'off',
+      // no-undef is a JS-only rule; svelte-check (TypeScript) is the authoritative
+      // type checker for .svelte files and understands the `generics` attribute.
+      'no-undef': 'off',
     },
   },
   {
