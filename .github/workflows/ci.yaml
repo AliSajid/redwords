@@ -1,0 +1,58 @@
+---
+name: CI
+
+# Continuous-integration gate. Runs on every push and pull request to the
+# `next` branch so that a broken build, lint failure, or failing test is caught
+# before it can reach a deployment. This is the only workflow that runs on
+# pull_request, so it is the gate that protects the branch.
+on:
+  push:
+    branches: ['next']
+  pull_request:
+    branches: ['next']
+
+# Least-privilege token: the gate only needs to read the repository.
+permissions:
+  contents: read
+
+# Cancel superseded runs of the same ref so a fast-moving branch does not pile
+# up redundant jobs.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: 'false'
+      - name: Install toolchain via mise
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - name: Cache pnpm store
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      # Each step delegates to a mise task so the command is defined once in
+      # mise.toml and runs identically on a developer's machine and in CI.
+      - name: Install dependencies
+        run: mise run ci-install
+      - name: Ensure playwright has the latest browser binaries
+        run: mise run ci-playwright
+      - name: Ensure project is formatted and linted
+        run: mise run ci-lint
+      - name: Ensure project syncs the configs
+        run: mise run ci-check
+      - name: Build
+        run: mise run ci-build
+      - name: Test
+        run: mise run ci-test

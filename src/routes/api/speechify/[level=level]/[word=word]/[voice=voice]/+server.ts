@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ params }) => {
     credentials: fromTemporaryCredentials({
       params: {
         RoleArn: AWS_REDWORD_ROLE_ARN,
-        RoleSessionName: `vercel-polly-redwords_session-${Date.now()}`,
+        RoleSessionName: `redwords-polly_session-${Date.now()}`,
       },
       clientConfig: { region: 'us-east-2' },
     }),

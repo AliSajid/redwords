@@ -3,12 +3,23 @@ name: Test GPG Subkey Import
 on:
   workflow_dispatch:
 
+# The job only reads the repository and imports a key into the runner, so the
+# token needs no write access.
+permissions:
+  contents: read
+
+# Only one GPG test at a time; a newer dispatch supersedes an in-flight one.
+concurrency:
+  group: test-gpg-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-gpg:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Setup GPG Keys
-        uses: crazy-max/ghaction-import-gpg@v7
+        uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
         with:
           git_user_signingkey: 'true'
           git_commit_gpgsign: 'true'
@@ -17,5 +28,7 @@ jobs:
           passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
           git_committer_email: ${{ vars.GIT_AUTHOR_EMAIL }}
           #          fingerprint: ${{ vars.GPG_FINGERPRINT }}
+      # Kept inline (not a mise task): a one-off CI-only diagnostic with no
+      # local equivalent. Reusable build/test/deploy commands live in mise.toml.
       - name: Output Keys
         run: gpg --batch --with-colons --with-keygrip --list-secret-keys

@@ -1,4 +1,16 @@
+# mise configuration for the redwords project.
+#
+# This file pins the toolchain versions used locally and in CI, and defines the
+# reusable tasks that the GitHub Actions workflows invoke. Keeping the commands
+# here (instead of inline `run:` shell in the workflows) means the build, test,
+# and deploy steps are defined in exactly one place and run identically on a
+# developer's machine and in the runner.
+#
+# Docs: https://mise.jdx.dev/tasks/
+
 [tools]
+# Runtime and CLI tool versions. These are installed on demand by mise and are
+# the same versions the CI runners use (via jdx/mise-action).
 node = "24.22.2"
 "npm:dotenv-cli" = "11.1.0"
 yamllint = "1.38.0"
@@ -6,3 +18,58 @@ markdownlint-cli2 = "0.24.0"
 gitleaks = "8.30.1"
 cspell = "10.4.1"
 typos = "1.52.2"
+
+# ---------------------------------------------------------------------------
+# Tasks
+#
+# Each task wraps a single pnpm command so the workflows can call
+# `mise run <task>` instead of embedding shell. Tasks are intentionally thin:
+# they delegate to the npm scripts in package.json, which remain the source of
+# truth for the actual commands.
+# ---------------------------------------------------------------------------
+
+[tasks.ci-install]
+description = "Install dependencies with a frozen lockfile (CI)"
+run = "pnpm install --frozen-lockfile"
+
+[tasks.ci-playwright]
+description = "Install Playwright browser binaries and their system dependencies (CI)"
+run = "pnpm exec playwright install --with-deps"
+
+[tasks.ci-lint]
+description = "Run Prettier and ESLint checks (CI)"
+run = "pnpm run lint"
+
+[tasks.ci-check]
+description = "Sync SvelteKit config and run svelte-check (CI)"
+run = "pnpm run check"
+
+[tasks.ci-build]
+description = "Build the SvelteKit app for Cloudflare Pages (CI)"
+run = "pnpm run build"
+
+[tasks.ci-test]
+description = "Run integration and unit tests (CI)"
+run = "pnpm run test"
+
+[tasks.ci-release]
+description = "Publish a semantic-release (CI)"
+run = "pnpm run release"
+
+# Deploy tasks. The preview task takes the branch as a positional argument so
+# the same task can target any branch: `mise run deploy-preview feature/foo`.
+# Production always deploys the `main` branch.
+#
+# The `usage` spec declares the argument; mise exposes it to the run script as
+# the `usage_branch` environment variable. `${usage_branch?}` errors if the
+# argument is missing, so a preview deploy can never silently deploy the wrong
+# branch.
+
+[tasks.deploy-preview]
+description = "Deploy to the Cloudflare Pages preview environment for a branch"
+usage = 'arg "<branch>" help="Git branch to deploy as a preview"'
+run = 'pnpm exec wrangler pages deploy .svelte-kit/cloudflare --project-name=redwords --branch="${usage_branch?}"'
+
+[tasks.deploy-prod]
+description = "Deploy to the Cloudflare Pages production environment (main branch)"
+run = "pnpm exec wrangler pages deploy .svelte-kit/cloudflare --project-name=redwords --branch=main"
