@@ -7,11 +7,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
 
-# A preview deploy writes to the Cloudflare Pages project and the release step
-# pushes tags, so the token needs write access to contents and pull requests.
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 # Only one preview deploy per branch at a time; a newer dispatch supersedes an
 # in-flight one so a fast-moving branch does not queue redundant deploys.
@@ -23,6 +19,11 @@ jobs:
   Build-and-Test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # The release step pushes tags, so this job needs write access to contents
+    # and pull requests.
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -63,6 +64,10 @@ jobs:
     needs: Build-and-Test
     if: needs.Build-and-Test.result == 'success'
     timeout-minutes: 30
+    # The deploy job only checks out the repository, so it needs read access to
+    # contents.
+    permissions:
+      contents: read
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
