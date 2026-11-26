@@ -4,10 +4,11 @@ name: Cloudflare Preview Deployments
 on:
   workflow_dispatch:
 
-env:
-  GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
-
 permissions: {}
+
+defaults:
+  run:
+    shell: bash
 
 # Only one preview deploy per branch at a time; a newer dispatch supersedes an
 # in-flight one so a fast-moving branch does not queue redundant deploys.
@@ -17,18 +18,17 @@ concurrency:
 
 jobs:
   Build-and-Test:
-    runs-on: ubuntu-latest
+    name: Build and Test
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
-    # The release step pushes tags, so this job needs write access to contents
-    # and pull requests.
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # the release step pushes tags
+      pull-requests: write # the release step updates the PR status
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: 'false'
+          persist-credentials: "false"
       - name: Install toolchain via mise
         uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
       - name: Setup pnpm
@@ -60,14 +60,13 @@ jobs:
           GH_TOKEN: ${{ secrets.ACTIONS_PAT_GITHUB }}
         run: mise run ci-release
   Deploy-Preview:
-    runs-on: ubuntu-latest
+    name: Deploy Preview
+    runs-on: ubuntu-26.04
     needs: Build-and-Test
-    if: needs.Build-and-Test.result == 'success'
+    if: ${{ needs.Build-and-Test.result == 'success' }}
     timeout-minutes: 30
-    # The deploy job only checks out the repository, so it needs read access to
-    # contents.
     permissions:
-      contents: read
+      contents: read # the deploy job only checks out the repository
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -75,7 +74,7 @@ jobs:
           # The deploy job authenticates to Cloudflare via CLOUDFLARE_API_TOKEN,
           # not git credentials, so the checkout's credentials are not persisted
           # into the runner environment (least-privilege, matches Build-and-Test).
-          persist-credentials: 'false'
+          persist-credentials: "false"
       - name: Install toolchain via mise
         uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
       - name: Setup pnpm

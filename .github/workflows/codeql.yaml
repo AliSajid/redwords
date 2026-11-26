@@ -1,14 +1,14 @@
 ---
-name: 'CodeQL'
+name: "CodeQL"
 
 on:
   push:
-    branches: ['next']
+    branches: ["next"]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: ['next']
+    branches: ["next"]
   schedule:
-    - cron: '45 5 * * 2'
+    - cron: "45 5 * * 2"
 
 # Cancel superseded runs of the same ref so a fast-moving branch does not pile
 # up redundant analyses.
@@ -16,20 +16,27 @@ concurrency:
   group: codeql-${{ github.ref }}
   cancel-in-progress: true
 
+# Restrict the default token to nothing; each job grants only the scopes it
+# needs.
+permissions: {}
+
 jobs:
   analyze:
     name: Analyze
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-26.04"
     timeout-minutes: 360
     permissions:
+      # The CodeQL action reads the workflow and action metadata to build the
+      # analysis.
       actions: read
       contents: read
+      # Uploads the SARIF results to the Security tab.
       security-events: write
 
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript-typescript']
+        language: ["javascript-typescript"]
 
     steps:
       - name: Checkout repository
@@ -44,4 +51,4 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
         with:
-          category: '/language:${{matrix.language}}'
+          category: "/language:${{matrix.language}}"
